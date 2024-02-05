@@ -4,12 +4,11 @@ import { GlobalContext } from "@/context";
 import { adminNavOptions, navOptions } from "@/utils";
 import React, { useContext } from "react";
 import CommonModal from "../CommonModel";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import componentLoader from "../Loader/ComponentLoader";
 
 const isAdminView = false;
-const isAuthUser = false;
-const user = {
-  role: "admin",
-};
 
 const NavItems = ({ isModalView = false}) => {
   return (
@@ -46,6 +45,17 @@ const NavItems = ({ isModalView = false}) => {
 
 const Navbar = () => {
   const { showNavModal, setShowNavModal } = useContext(GlobalContext);
+  const { user, isAuthUser, setUser, setIsAuthUser } = useContext(GlobalContext); 
+  const router = useRouter();
+
+  const handleLogout = () => {
+    setIsAuthUser(false);
+    setUser(null);
+    Cookies.remove('token');
+    localStorage.clear();
+    router.push("/");
+
+  }
   return (
     <>
       <nav className="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200">
@@ -71,12 +81,18 @@ const Navbar = () => {
                 {isAdminView ? "Client View" : "Admin View"}
               </button>
             ) : null}
-            {
-              <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white">
-                {" "}
-                {isAuthUser ? "Logout" : "Login"}{" "}
+            {isAuthUser ? (
+              <button
+                onClick={handleLogout}
+                className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white"
+              >
+                Logout
               </button>
-            }
+            ) : (
+              <button onClick={()=> router.push("/login")} className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white">
+                Login
+              </button>
+            )}
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"

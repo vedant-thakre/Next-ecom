@@ -77,7 +77,7 @@ export async function POST(req){
 
         return NextResponse.json(
           {
-            success: false,
+            success: true,
             message: `Welcome Back ${isExist.name}`,
             data: finalData,
           },
