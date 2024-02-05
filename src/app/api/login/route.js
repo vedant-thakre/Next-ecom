@@ -3,6 +3,7 @@ import { compare } from "bcryptjs";
 import Joi from "joi";
 import { NextResponse } from "next/server";
 import jwt from 'jsonwebtoken';
+import User from "@/models/user";
 
 export const dynamic = "force-dynamic";
 
