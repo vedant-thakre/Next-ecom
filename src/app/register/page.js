@@ -3,7 +3,7 @@ import React from 'react'
 
 const isRegistered = true;
 // const isAutheticated  = false
-// const user = null;
+// const user = null; ok
 
 const Register = () => {
   return (
