@@ -1,7 +1,7 @@
 "use client";
 
 import { GlobalContext } from "@/context";
-import { adminNavOptions, navOptions, styles } from "@/utils";
+import { adminNavOptions, navOptions } from "@/utils";
 import React, { useContext } from "react";
 import CommonModal from "../CommonModel";
 
@@ -58,17 +58,21 @@ const Navbar = () => {
           <div className="flex md:order-2 gap-2">
             {!isAdminView && isAuthUser ? (
               <>
-                <button className={styles.btnstyle}>Account</button>
-                <button className={styles.btnstyle}>Cart</button>
+                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white">
+                  Account
+                </button>
+                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white">
+                  Cart
+                </button>
               </>
             ) : null}
             {user?.role === "admin" ? (
-              <button className={styles.btnstyle}>
+              <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white">
                 {isAdminView ? "Client View" : "Admin View"}
               </button>
             ) : null}
             {
-              <button className={styles.btnstyle}>
+              <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white">
                 {" "}
                 {isAuthUser ? "Logout" : "Login"}{" "}
               </button>
@@ -99,15 +103,15 @@ const Navbar = () => {
               </svg>
             </button>
           </div>
-          <NavItems  />
+          <NavItems />
         </div>
       </nav>
       {
-        <CommonModal 
-            show={showNavModal} 
-            setShow={setShowNavModal} 
-            showModalTitle={false}
-            mainContent={<NavItems isModalView={true} />}
+        <CommonModal
+          show={showNavModal}
+          setShow={setShowNavModal}
+          showModalTitle={false}
+          mainContent={<NavItems isModalView={true} />}
         />
       }
     </>

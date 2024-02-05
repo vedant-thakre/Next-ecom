@@ -3,7 +3,9 @@ import React from 'react'
 const SelectComponent = ({value, onChange, label, options= []}) => {
   return (
     <div className="relative">
-      <p className="px-2 py-0 -mt-3 mb-0 ml-2 font-medium text-gray-600"></p>
+      <p className="px-2 py-0 absolute -mt-3 mb-0 ml-2 font-medium bg-white text-gray-600">
+        {label}
+      </p>
       <select
         value={value}
         onChange={onChange}
