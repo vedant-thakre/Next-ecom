@@ -8,7 +8,7 @@ export const loginNewUser = async (formdata) => {
       },
       body: JSON.stringify(formdata),
     });
-    const finalData = res.json();
+    const finalData = await res.json();
     return finalData;
   } catch (error) {
     console.log("Error : ", error);
