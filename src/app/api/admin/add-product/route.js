@@ -1,5 +1,7 @@
 import connectDB from "@/database";
 import Product from "@/models/product";
+import Joi from "joi";
+import { NextResponse } from "next/server";
 
 
 export const dynamic = "force-dynamic";
@@ -36,7 +38,7 @@ export async function POST(req){
               priceDrop,
               sizes,
               category,
-            } = ex;
+            } = extractData;
 
             const { error } = AddNewProductSchema.validate({
               name,
@@ -62,7 +64,7 @@ export async function POST(req){
               );
             }
 
-            const newProduct = new Product.create(extractData);
+            const newProduct = await Product.create(extractData);
 
             if(newProduct){
                 return NextResponse.json(
