@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import ProductTile from "./ProductTile";
 import ProductButtons from "./ProductButtons";
 import { useRouter } from "next/navigation";
+import Notification from "../Notification";
 
 
 const CommonListing = ({data}) => {
@@ -31,6 +32,7 @@ const CommonListing = ({data}) => {
             : null}
         </div>
       </div>
+      <Notification/>
     </section>
   );
 };
