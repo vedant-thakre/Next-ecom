@@ -1,16 +1,26 @@
-"use client"
+"use client";
 import InputComponent from "@/components/FormElements/InputComponent";
 import SelectComponent from "@/components/FormElements/SelectComponent";
 import TileComponent from "@/components/FormElements/TileComponent";
 import ComponentLoader from "@/components/Loader/ComponentLoader";
 import Notification from "@/components/Notification";
 import { GlobalContext } from "@/context";
-import { addNewProduct } from "@/services/product";
-import { AvailableSizes, adminAddProductformControls, firebaseConfig, firebaseStroageURL } from "@/utils";
+import { addNewProduct, updateAProduct } from "@/services/product";
+import {
+  AvailableSizes,
+  adminAddProductformControls,
+  firebaseConfig,
+  firebaseStroageURL,
+} from "@/utils";
 import { initializeApp } from "firebase/app";
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage"
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { useRouter } from "next/navigation";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const app = initializeApp(firebaseConfig);
@@ -24,7 +34,7 @@ const createUniqueFileName = (getFile) => {
   return `${getFile.name}-${timeStamp}-${randomStringValue}`;
 };
 
-async function helperForUPloadingImageToFirebase(file){
+async function helperForUPloadingImageToFirebase(file) {
   const getFileName = createUniqueFileName(file);
   const storageReference = ref(storage, `ecommerce/${getFileName}`);
   const uploadImage = uploadBytesResumable(storageReference, file);
@@ -59,27 +69,37 @@ const initialFormData = {
 };
 
 const AdminAddNewProduct = () => {
-
   const [formData, setFormData] = useState(initialFormData);
-  const {  componentLoader, setComponentLoader } = useContext(GlobalContext);
+  const {
+    componentLoader,
+    setComponentLoader,
+    currentUpdatedProduct,
+    setCurrentUpdatedProduct,
+  } = useContext(GlobalContext);
   const router = useRouter();
 
+  console.log(currentUpdatedProduct);
+
+  useEffect(() => {
+    if (currentUpdatedProduct !== null) {
+      setFormData(currentUpdatedProduct);
+    }
+  }, [currentUpdatedProduct]);
+
   async function handleImage(e) {
-      console.log(e.target.files[0]);
-      const extractImageUrl = await helperForUPloadingImageToFirebase(
-        e.target.files[0]
-      );
-      
-      if (extractImageUrl !== "") {
-        setFormData({
-          ...formData,
-          imageUrl: extractImageUrl,
-        });
-      }
+    const extractImageUrl = await helperForUPloadingImageToFirebase(
+      e.target.files[0]
+    );
+
+    if (extractImageUrl !== "") {
+      setFormData({
+        ...formData,
+        imageUrl: extractImageUrl,
+      });
+    }
   }
 
   function handleTileClick(getCurrentItem) {
-    console.log(getCurrentItem)
     let cpySizes = [...formData.sizes];
     const index = cpySizes.findIndex((item) => item.id === getCurrentItem.id);
 
@@ -97,14 +117,16 @@ const AdminAddNewProduct = () => {
 
   const handleAddProduct = async () => {
     setComponentLoader({ loading: true, id: "" });
-    const res = await addNewProduct(formData);
-
-    console.log(res);
+    const res =
+      currentUpdatedProduct !== null
+        ? await updateAProduct(formData)
+        : await addNewProduct(formData);
 
     if (res.success) {
       setComponentLoader({ loading: false, id: "" });
       toast.success(res.message);
       setFormData(initialFormData);
+      setCurrentUpdatedProduct(null);
       setTimeout(() => {
         router.push("/admin-view/all-products");
       }, 1000);
@@ -113,10 +135,7 @@ const AdminAddNewProduct = () => {
       setComponentLoader({ loading: false, id: "" });
       setFormData(initialFormData);
     }
-  }
-
-  
-  console.log(formData);
+  };
 
   return (
     <div className="w-full mt-5 mx-0 mb-0 relative">
@@ -178,12 +197,12 @@ const AdminAddNewProduct = () => {
                 color={"#ffffff"}
               />
             ) : (
-              "Add Product"
+              currentUpdatedProduct !== null ? "Update Product" : "Add Product"
             )}
           </button>
         </div>
       </div>
-      <Notification/>
+      <Notification />
     </div>
   );
 };

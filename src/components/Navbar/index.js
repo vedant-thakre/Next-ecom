@@ -2,7 +2,7 @@
 
 import { GlobalContext } from "@/context";
 import { adminNavOptions, navOptions } from "@/utils";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import CommonModal from "../CommonModel";
 import Cookies from "js-cookie";
 import { usePathname, useRouter } from "next/navigation";
@@ -45,7 +45,14 @@ const NavItems = ({ isModalView = false, isAdminView, router}) => {
 
 const Navbar = () => {
   const { showNavModal, setShowNavModal } = useContext(GlobalContext);
-  const { user, isAuthUser, setUser, setIsAuthUser } = useContext(GlobalContext); 
+  const {
+    user,
+    isAuthUser,
+    setUser,
+    setIsAuthUser,
+    currentUpdatedProduct,
+    setCurrentUpdatedProduct,
+  } = useContext(GlobalContext); 
 
   const pathName = usePathname();
   const router = useRouter();
@@ -59,6 +66,17 @@ const Navbar = () => {
 
   }
   const isAdminView = pathName.includes("admin-view");
+
+  useEffect(() => {
+    if (
+      pathName !== "/admin-view/add-product" &&
+      currentUpdatedProduct !== null
+    ) {
+      setCurrentUpdatedProduct(null);
+    }
+  }, [pathName])
+  
+
   return (
     <>
       <nav className="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200">

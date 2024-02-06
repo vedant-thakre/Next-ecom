@@ -9,6 +9,7 @@ export default function GlobalState({ children }) {
   const [pageLoader, setpageLoader] = useState(false);
   const [componentLoader, setComponentLoader] = useState({ loading: false, id: ''});
   const [isAuthUser, setIsAuthUser] = useState(null);
+  const [currentUpdatedProduct, setCurrentUpdatedProduct] = useState(null);
   const [user, setUser] = useState(null);
 
 
@@ -30,6 +31,8 @@ export default function GlobalState({ children }) {
         setShowNavModal,
         pageLoader, 
         setpageLoader,
+        currentUpdatedProduct, 
+        setCurrentUpdatedProduct,
         componentLoader, 
         setComponentLoader,
         isAuthUser,

@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 import colors from 'colors';
 
 const configOptions = {
-    useNewUrlParser : true,
-    useUnifiedTopology : true
-}
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
 
 const connectDB = async() => {
     const connectionUrl =
