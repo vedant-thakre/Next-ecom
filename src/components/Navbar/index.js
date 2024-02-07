@@ -6,13 +6,14 @@ import React, { useContext, useEffect } from "react";
 import CommonModal from "../CommonModel";
 import Cookies from "js-cookie";
 import { usePathname, useRouter } from "next/navigation";
+import CartModal from "../CartModel";
 
 
 const NavItems = ({ isModalView = false, isAdminView, router}) => {
   return (
     <div
       className={`item-center  justify-between w-full md:flex md:w-auto
-       ${isModalView ? "" : "hidden"}`}
+      ${isModalView ? "" : "hidden"}`}
       id="nav-items"
     >
       <ul
@@ -52,6 +53,8 @@ const Navbar = () => {
     setIsAuthUser,
     currentUpdatedProduct,
     setCurrentUpdatedProduct,
+    showCartModal,
+    setShowCartModal,
   } = useContext(GlobalContext); 
 
   const pathName = usePathname();
@@ -95,7 +98,7 @@ const Navbar = () => {
                 <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white">
                   Account
                 </button>
-                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white">
+                <button onClick={()=> router.push("/cart")} className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white">
                   Cart
                 </button>
               </>
@@ -167,9 +170,12 @@ const Navbar = () => {
           setShow={setShowNavModal}
           router={router}
           showModalTitle={false}
-          mainContent={<NavItems isModalView={true} />}
+          mainContent={
+            <NavItems router={router} isAdminView={true} isModalView={true} />
+          }
         />
       }
+      {showCartModal && <CartModal />}
     </>
   );
 };

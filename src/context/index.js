@@ -11,6 +11,8 @@ export default function GlobalState({ children }) {
   const [isAuthUser, setIsAuthUser] = useState(null);
   const [currentUpdatedProduct, setCurrentUpdatedProduct] = useState(null);
   const [user, setUser] = useState(null);
+  const [showCartModal, setShowCartModal] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
 
 
   useEffect(() => {
@@ -29,12 +31,16 @@ export default function GlobalState({ children }) {
       value={{
         showNavModal,
         setShowNavModal,
-        pageLoader, 
+        pageLoader,
         setpageLoader,
-        currentUpdatedProduct, 
+        currentUpdatedProduct,
         setCurrentUpdatedProduct,
-        componentLoader, 
+        componentLoader,
         setComponentLoader,
+        showCartModal,
+        cartItems,
+        setCartItems,
+        setShowCartModal,
         isAuthUser,
         setIsAuthUser,
         user,

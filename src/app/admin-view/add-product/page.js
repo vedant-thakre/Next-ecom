@@ -78,7 +78,7 @@ const AdminAddNewProduct = () => {
   } = useContext(GlobalContext);
   const router = useRouter();
 
-  console.log(currentUpdatedProduct);
+  //console.log(currentUpdatedProduct);
 
   useEffect(() => {
     if (currentUpdatedProduct !== null) {

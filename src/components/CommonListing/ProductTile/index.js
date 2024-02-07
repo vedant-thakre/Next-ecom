@@ -1,10 +1,12 @@
 "use client"
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 const ProductTile = ({ item }) => {
+    const router = useRouter();
   return (
-    <div>
-      <div className=" overflow-hidden aspect-w-1 aspect-h-1 h-52">
+    <div onClick={() => router.push(`/product/${item._id}`)}>
+      <div className="overflow-hidden aspect-w-1 aspect-h-1 h-52">
         <img
           src={item.imageUrl}
           alt="Product Image"
