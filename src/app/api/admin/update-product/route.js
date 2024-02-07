@@ -1,4 +1,5 @@
 import connectDB from "@/database";
+import AuthUser from "@/middleware/AuthUser";
 import Product from "@/models/product";
 import { NextResponse } from "next/server";
 
@@ -8,9 +9,9 @@ export async function PUT(req) {
   try {
     await connectDB();
 
-    //const isAuthUser = await AuthUser(req);
+    const isAuthUser = await AuthUser(req);
 
-    // if (isAuthUser?.role === "admin") {
+    if (isAuthUser?.role === "admin") {
 
       const extractData = await req.json();
       const {
@@ -55,12 +56,12 @@ export async function PUT(req) {
           message: "Failed to update the product ! Please try again later",
         });
       }
-    // } else {
-    //   return NextResponse.json({
-    //     success: false,
-    //     message: "You are not authenticated",
-    //   });
-    //}
+    } else {
+      return NextResponse.json({
+        success: false,
+        message: "You are not authenticated",
+      });
+    }
   } catch (e) {
     console.log(error);
     return NextResponse.json({

@@ -1,4 +1,5 @@
 import connectDB from "@/database";
+import AuthUser from "@/middleware/AuthUser";
 import Product from "@/models/product";
 import Joi from "joi";
 import { NextResponse } from "next/server";
@@ -23,80 +24,82 @@ export async function POST(req){
     try {
         await connectDB();
 
-        const user = 'admin';
+        const isAuthUser = await AuthUser(req);
 
-        if(user === 'admin'){
-            const extractData = await req.json();
+        console.log(isAuthUser, "vedant");
 
-            const {
-              name,
-              description,
-              price,
-              imageUrl,
-              onSale,
-              deliveryInfo,
-              priceDrop,
-              sizes,
-              category,
-            } = extractData;
+        if (isAuthUser?.role === "admin") {
+          const extractData = await req.json();
 
-            const { error } = AddNewProductSchema.validate({
-              name,
-              description,
-              price,
-              imageUrl,
-              onSale,
-              deliveryInfo,
-              priceDrop,
-              sizes,
-              category,
-            });
+          const {
+            name,
+            description,
+            price,
+            imageUrl,
+            onSale,
+            deliveryInfo,
+            priceDrop,
+            sizes,
+            category,
+          } = extractData;
 
-            if (error) {
-              return NextResponse.json(
-                {
-                  success: false,
-                  message: error.details[0].message,
-                },
-                {
-                  status: 400,
-                }
-              );
-            }
+          const { error } = AddNewProductSchema.validate({
+            name,
+            description,
+            price,
+            imageUrl,
+            onSale,
+            deliveryInfo,
+            priceDrop,
+            sizes,
+            category,
+          });
 
-            const newProduct = await Product.create(extractData);
-
-            if(newProduct){
-                return NextResponse.json(
-                  {
-                    success: true,
-                    message: "Product Added Successfully",
-                  },
-                  {
-                    status: 200,
-                  }
-                );
-            }else{
-                return NextResponse.json(
-                  {
-                    success: false,
-                    message: "Failed to add the product",
-                  },
-                  {
-                    status: 400,
-                  }
-                );
-            }
-        }else{
+          if (error) {
             return NextResponse.json(
               {
                 success: false,
-                message: "You're Not Authorized",
+                message: error.details[0].message,
               },
               {
                 status: 400,
               }
             );
+          }
+
+          const newProduct = await Product.create(extractData);
+
+          if (newProduct) {
+            return NextResponse.json(
+              {
+                success: true,
+                message: "Product Added Successfully",
+              },
+              {
+                status: 200,
+              }
+            );
+          } else {
+            return NextResponse.json(
+              {
+                success: false,
+                message: "Failed to add the product",
+              },
+              {
+                status: 400,
+              }
+            );
+          }
+        } else {
+          return NextResponse.json(
+            {
+              success: false,
+              message: "You're Not Authorized",
+            },
+            {
+              status: 400,
+            }
+          );
         }
           
 

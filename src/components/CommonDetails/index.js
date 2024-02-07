@@ -43,7 +43,7 @@ export default function CommonDetails({ item }) {
               <div className="lg:order-2 lg:ml-5">
                 <div className="max-w-xl overflow-hidden rounded-lg">
                   <img
-                    src={item.imageUrl}
+                    src={item?.imageUrl}
                     className="h-full w-full max-w-full object-cover"
                     alt="Product Details"
                   />
@@ -56,7 +56,7 @@ export default function CommonDetails({ item }) {
                     className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
                   >
                     <img
-                      src={item.imageUrl}
+                      src={ item && item.imageUrl}
                       className="h-full w-full object-cover"
                       alt="Product Details"
                     />
@@ -66,7 +66,7 @@ export default function CommonDetails({ item }) {
                     className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
                   >
                     <img
-                      src={item.imageUrl}
+                      src={item?.imageUrl}
                       className="h-full w-full object-cover"
                       alt="Product Details"
                     />
@@ -81,15 +81,15 @@ export default function CommonDetails({ item }) {
             </h1>
             <div className="mt-10 flex flex-col items-center justify-between space-y-4 botder-t border-b py-4 sm:flex-row sm:space-y-0">
               <div className="flex items-end gap-4">
-                {item.onSale === "yes" ? (
+                {item?.onSale === "yes" ? (
                   <h1 className="text-3xl font-bold text-red-700">{`$ ${(
-                    item.price -
-                    item.price * (item.priceDrop / 100)
+                    item?.price -
+                    item?.price * (item.priceDrop / 100)
                   ).toFixed(2)}`}</h1>
                 ) : null}
                 <h1
                   className={`font-bold mr-2 ${
-                    item.onSale === "yes"
+                    item?.onSale === "yes"
                       ? "line-through text-2xl text-gray-400"
                       : "text-3xl"
                   }`}
