@@ -96,20 +96,42 @@ export const productByCategory = async (id) => {
   }
 };
 
-// export const productById = async (id) => {
-//   try {
-//     const res = await fetch(
-//       `http://localhost:3000/api/admin/product-by-id?id=${id}`,
-//       {
-//         method: "GET",
-//         cache: "no-store",
-//       }
-//     );
+// product by sale
 
-//     const data = await res.json();
+export const productBySale = async (id) => {
+  try {
+    const res = await fetch(
+      `http://localhost:3000/api/admin/on-sale?id=${id}`,
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
 
-//     return data;
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
+    const data = await res.json();
+
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// get product by id
+
+export const productById = async (id) => {
+  try {
+    const res = await fetch(
+      `http://localhost:3000/api/admin/product-by-id?id=${id}`,
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
+
+    const data = await res.json();
+
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
