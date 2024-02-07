@@ -153,10 +153,10 @@ export default function CartModal() {
         <Fragment>
           <button
             type="button"
-            // onClick={() => {
-            //   router.push("/cart");
-            //   setShowCartModal(false);
-            // }}
+            onClick={() => {
+              router.push("/cart");
+              setShowCartModal(false);
+            }}
             className="mt-1.5 w-full inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
           >
             Go To Cart
@@ -164,10 +164,10 @@ export default function CartModal() {
           <button
             disabled={cartItems && cartItems.length === 0}
             type="button"
-            // onClick={() => {
-            //   router.push("/checkout");
-            //   setShowCartModal(false);
-            // }}
+            onClick={() => {
+              router.push("/checkout");
+              setShowCartModal(false);
+            }}
             className="mt-1.5 w-full inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide disabled:opacity-50"
           >
             Checkout
