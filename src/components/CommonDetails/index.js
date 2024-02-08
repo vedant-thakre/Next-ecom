@@ -5,34 +5,31 @@ import { useContext } from "react";
 import { toast } from "react-toastify";
 import Notification from "../Notification";
 import ComponentLoader from "../Loader/ComponentLoader";
+import { addToCart } from "@/services/cart";
 
 export default function CommonDetails({ item }) {
-  // const {
-  //   setComponentLoader,
-  //   componentLoader,
-  //   user,
-  //   setShowCartModal,
-  // } = useContext(GlobalContext);
+  const {
+    setComponentLoader,
+    componentLoader,
+    user,
+    setShowCartModal,
+  } = useContext(GlobalContext);
 
-  // async function handleAddToCart(getItem) {
-  //   setComponentLevelLoader({ loading: true, id: "" });
+  async function handleAddToCart(getItem) {
+    setComponentLoader({ loading: true, id: "" });
 
-  //   const res = await addToCart({ productID: getItem._id, userID: user._id });
+    const res = await addToCart({ productID: getItem._id, userID: user._id });
 
-  //   if (res.success) {
-  //     toast.success(res.message, {
-  //       position: toast.POSITION.TOP_RIGHT,
-  //     });
-  //     setComponentLevelLoader({ loading: false, id: "" });
-  //     setShowCartModal(true);
-  //   } else {
-  //     toast.error(res.message, {
-  //       position: toast.POSITION.TOP_RIGHT,
-  //     });
-  //     setComponentLevelLoader({ loading: false, id: "" });
-  //     setShowCartModal(true);
-  //   }
-  // }
+    if (res.success) {
+      toast.success(res.message);
+      setComponentLoader({ loading: false, id: "" });
+      setShowCartModal(true);
+    } else {
+      toast.error(res.message);
+      setComponentLoader({ loading: false, id: "" });
+      setShowCartModal(true);
+    }
+  }
 
   return (
     <section className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -99,10 +96,10 @@ export default function CommonDetails({ item }) {
               </div>
               <button
                 type="button"
-                //onClick={() => handleAddToCart(item)}
+                onClick={() => handleAddToCart(item)}
                 className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white"
               >
-                {/* {componentLoader && componentLoader.loading ? (
+                {componentLoader && componentLoader.loading ? (
                   <ComponentLoader
                     text={"Adding to Cart"}
                     color={"#ffffff"}
@@ -110,8 +107,7 @@ export default function CommonDetails({ item }) {
                   />
                 ) : (
                   "Add to Cart"
-                )} */}
-                Add to Cart
+                )}
               </button>
             </div>
             <ul className="mt-8 space-y-2">
