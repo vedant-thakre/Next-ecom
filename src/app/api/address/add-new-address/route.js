@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 const AddNewAddress = Joi.object({
   fullName: Joi.string().required(),
   address: Joi.string().required(),
+  phone: Joi.string().required(),
   city: Joi.string().required(),
   country: Joi.string().required(),
   postalCode: Joi.string().required(),
@@ -24,11 +25,12 @@ export async function POST(req) {
     if (isAuthUser) {
       const data = await req.json();
 
-      const { fullName, address, city, country, postalCode, userID } = data;
+      const { fullName, address, phone, city, country, postalCode, userID } = data;
 
       const { error } = AddNewAddress.validate({
         fullName,
         address,
+        phone,
         city,
         country,
         postalCode,

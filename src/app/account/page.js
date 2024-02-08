@@ -1,10 +1,14 @@
 "use client";
 
+import InputComponent from "@/components/FormElements/InputComponent";
 import ComponentLoader from "@/components/Loader/ComponentLoader";
 import Notification from "@/components/Notification";
 import { GlobalContext } from "@/context";
+import { addNewAddress, deleteAddress, fetchAllAddresses, updateAddress } from "@/services/address";
+import { addNewAddressFormControls } from "@/utils";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
 export default function Account() {
@@ -25,6 +29,7 @@ export default function Account() {
   const router = useRouter();
 
   async function extractAllAddresses() {
+    console.log(user);
     setpageLoader(true);
     const res = await fetchAllAddresses(user?._id);
 
@@ -65,6 +70,7 @@ export default function Account() {
       setAddressFormData({
         fullName: "",
         city: "",
+        phone:"",
         country: "",
         postalCode: "",
         address: "",
@@ -77,6 +83,7 @@ export default function Account() {
     setAddressFormData({
       fullName: getCurrentAddress.fullName,
       city: getCurrentAddress.city,
+      phone: getCurrentAddress.phone,
       country: getCurrentAddress.country,
       postalCode: getCurrentAddress.postalCode,
       address: getCurrentAddress.address,
@@ -115,10 +122,10 @@ export default function Account() {
             </div>
             <div className="flex flex-col flex-1">
               <h4 className="text-lg font-semibold text-center md:text-left">
-                {user?.name}
+                {user?.name?.charAt(0).toUpperCase() + user?.name?.slice(1)}
               </h4>
               <p>{user?.email}</p>
-              <p>{user?.role}</p>
+              <p>{user?.role?.charAt(0).toUpperCase() + user?.role?.slice(1)}</p>
             </div>
             <button
               onClick={() => router.push("/orders")}
@@ -142,6 +149,7 @@ export default function Account() {
                       <div className="border p-6" key={item._id}>
                         <p>Name : {item.fullName}</p>
                         <p>Address : {item.address}</p>
+                        <p>Phone : {item.phone}</p>
                         <p>City : {item.city}</p>
                         <p>Country : {item.country}</p>
                         <p>PostalCode : {item.postalCode}</p>

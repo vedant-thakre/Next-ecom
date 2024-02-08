@@ -22,7 +22,7 @@ export async function DELETE(req) {
     const isAuthUser = await AuthUser(req);
 
     if (isAuthUser) {
-      const deletedAddress = await Addressn .findByIdAndDelete(id);
+      const deletedAddress = await Address.findByIdAndDelete(id);
 
       if (deletedAddress) {
         return NextResponse.json({

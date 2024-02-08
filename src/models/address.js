@@ -8,6 +8,7 @@ const NewAddressSchema = new mongoose.Schema(
     },
     fullName: String,
     address: String,
+    phone: String,
     city: String,
     country: String,
     postalCode: String,

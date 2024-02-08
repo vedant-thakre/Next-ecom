@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-// Add New Addresss
+// Add New Address
 export const addNewAddress = async (formData) => {
   try {
     const res = await fetch("/api/address/add-new-address", {
@@ -20,6 +20,7 @@ export const addNewAddress = async (formData) => {
   }
 };
 
+// Fetching All Address
 export const fetchAllAddresses = async (id) => {
   try {
     const res = await fetch(`/api/address/get-all-address?id=${id}`, {
@@ -37,6 +38,7 @@ export const fetchAllAddresses = async (id) => {
   }
 };
 
+// Updating the Address
 export const updateAddress = async (formData) => {
   try {
     const res = await fetch("/api/address/update-address", {
@@ -56,6 +58,7 @@ export const updateAddress = async (formData) => {
   }
 };
 
+// Deleting the Address
 export const deleteAddress = async (id) => {
   try {
     const res = await fetch(`/api/address/delete-address?id=${id}`, {

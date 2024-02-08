@@ -88,17 +88,23 @@ const Navbar = () => {
             onClick={() => router.push("/")}
             className="flex items-center cursor-pointer"
           >
-            <span className="self-center text-xl lg:text-2xl font-semibold whitespace-nowrap">
+            <span className="self-center text-xl cursor-pointer lg:text-2xl font-semibold whitespace-nowrap">
               Urbanmarket
             </span>
           </div>
           <div className="flex md:order-2 gap-2">
             {!isAdminView && isAuthUser ? (
               <>
-                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white">
+                <buttono
+                  onClick={() => router.push("/account")}
+                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium cursor-pointer  uppercase tracking-white text-white"
+                >
                   Account
-                </button>
-                <button onClick={()=> router.push("/cart")} className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white">
+                </buttono>
+                <button
+                  onClick={() => router.push("/cart")}
+                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium cursor-pointer  uppercase tracking-white text-white"
+                >
                   Cart
                 </button>
               </>

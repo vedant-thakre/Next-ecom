@@ -1,46 +1,45 @@
 import connectDB from "@/database";
 import AuthUser from "@/middleware/AuthUser";
-import Address from "@/models/address";
+import Cart from "@/models/cart";
+import Order from "@/models/order";
+
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-export async function PUT(req) {
+export async function POST(req) {
   try {
     await connectDB();
     const isAuthUser = await AuthUser(req);
 
     if (isAuthUser) {
       const data = await req.json();
-      const { _id, fullName, phone, city, address, country, postalCode } = data;
+      const { user } = data;
 
-      const updateAddress = await Address.findOneAndUpdate(
-        {
-          _id: _id,
-        },
-        { fullName, city, phone, address, country, postalCode },
-        { new: true }
-      );
+      const saveNewOrder = await Order.create(data);
 
-      if (updateAddress) {
+      console.log(saveNewOrder);
+
+      if (saveNewOrder) {
+        await Cart.deleteMany({ userID: user });
+
         return NextResponse.json({
           success: true,
-          message: "Address updated successfully!",
+          message: "Products are on the way !",
         });
       } else {
         return NextResponse.json({
           success: false,
-          message: "failed to update address ! Please try again",
+          message: "Failed to create a order ! Please try again",
         });
       }
     } else {
       return NextResponse.json({
         success: false,
-        message: "You are not authenticated",
+        message: "You are not authticated",
       });
     }
   } catch (e) {
-    console.log(e);
     return NextResponse.json({
       success: false,
       message: "Something went wrong ! Please try again later",

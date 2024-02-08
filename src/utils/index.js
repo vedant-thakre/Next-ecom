@@ -223,6 +223,13 @@ export const addNewAddressFormControls = [
     componentType: "input",
   },
   {
+    id: "phone",
+    type: "input",
+    placeholder: "Enter your phone number",
+    label: "Phone",
+    componentType: "input",
+  },
+  {
     id: "city",
     type: "input",
     placeholder: "Enter your city",

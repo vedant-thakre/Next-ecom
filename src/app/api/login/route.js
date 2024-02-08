@@ -15,77 +15,81 @@ const schema = Joi.object({
 
 export async function POST(req){
     try {
-        await connectDB();
-        const { email, password } = await req.json();
+      await connectDB();
+      const { email, password } = await req.json();
 
-        const { error } = schema.validate({ email, password });
+      const { error } = schema.validate({ email, password });
 
-        if (error) {
-          return NextResponse.json(
-            {
-              success: false,
-              message: error.details[0].message,
-            },
-            {
-              status: 400,
-            }
-          );
-        }
-
-         // check if user exists or not
-        const isExist = await User.findOne({email});
-        if(!isExist){
-            return NextResponse.json(
-              {
-                success: false,
-                message: "User Doesn't Exists Please Register",
-              },
-              {
-                status: 400,
-              }
-            );
-        }
-
-        const checkPass = await compare(password, isExist.password);
-        if(!checkPass){
-           return NextResponse.json(
-              {
-                success: false,
-                message: "Incorrect Password",
-              },
-              {
-                status: 400,
-              }
-            );
-        }
-
-        const token = jwt.sign({
-          id: isExist?._id, email: isExist?.email, role: isExist?.role }, 
-          'default_secret_key', 
-          { expiresIn : '1d'}
-        );
-
-        const finalData = {
-          token,
-          user: {
-            email: isExist.email,
-            name: isExist.nmae,
-            _id: isExist._id,
-            role: isExist.role
-          }
-        }
-
+      if (error) {
         return NextResponse.json(
           {
-            success: true,
-            message: `Welcome Back ${isExist.name}`,
-            data: finalData,
+            success: false,
+            message: error.details[0].message,
           },
           {
-            status: 200,
+            status: 400,
           }
         );
+      }
 
+      // check if user exists or not
+      const isExist = await User.findOne({ email });
+      if (!isExist) {
+        return NextResponse.json(
+          {
+            success: false,
+            message: "User Doesn't Exists Please Register",
+          },
+          {
+            status: 400,
+          }
+        );
+      }
+
+      const checkPass = await compare(password, isExist.password);
+      if (!checkPass) {
+        return NextResponse.json(
+          {
+            success: false,
+            message: "Incorrect Password",
+          },
+          {
+            status: 400,
+          }
+        );
+      }
+
+      const token = jwt.sign(
+        {
+          id: isExist?._id,
+          name: isExist.name,
+          email: isExist?.email,
+          role: isExist?.role,
+        },
+        "default_secret_key",
+        { expiresIn: "1d" }
+      );
+      // {"email":"vedant@gmail.com","_id":"65c08e16d4fe0503dc9523d7","role":"admin"}
+      const finalData = {
+        token,
+        user: {
+          email: isExist.email,
+          name: isExist.name,
+          _id: isExist._id,
+          role: isExist.role,
+        },
+      };
+
+      return NextResponse.json(
+        {
+          success: true,
+          message: `Welcome Back ${isExist.name}`,
+          data: finalData,
+        },
+        {
+          status: 200,
+        }
+      );
     } catch (error) {
         console.log("Error : " ,error);
         return NextResponse.json(
