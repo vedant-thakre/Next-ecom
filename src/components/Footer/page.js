@@ -91,7 +91,7 @@ const Footer = () => {
         />
       </div>
       <p className=" text-xs tracking-wide text-gray-600">
-        The content of this site is copyright-protected and is the property of H
+        The content of this site is copyright-protected and is the property of U
         & M Hennes & Mauritz AB.
       </p>
       <h1
