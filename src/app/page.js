@@ -14,6 +14,46 @@ import { useRouter } from "next/navigation";
 import { GlobalContext } from "@/context";
 import { getAllAdminProducts, productByCategory } from "@/services/product";
 
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        zIndex: "10",
+        width: "20px",
+        height: "50px",
+        display: "block",
+        background: "transparent",
+        paddingRight: "70px",
+      }}
+      onClick={onClick}
+    />
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        zIndex: "10",
+        width: "20px",
+        height: "50px",
+        display: "block",
+        background: "transparent",
+        paddingLeft: "30px",
+        color: "black",
+      }}
+      onClick={onClick}
+    />
+  );
+}
+
 export default function Home() {
   const { isAuthUser } = useContext(GlobalContext);
   const [products, setProducts] = useState([]);
@@ -51,21 +91,51 @@ export default function Home() {
     autoplaySpeed: 3000,
   };
 
-    const settings2 = {
-      dots: false,
-      infinite: true,
-      speed: 1500,
-      slidesToShow: 2,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 3000,
-    };
+  const settings2 = {
+    dots: false,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplaySpeed: 2000,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+    ],
+  };
+
 
   console.log(expoloreProducts);
 
+  
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-7 lg:p-24">
-      <section className="">
+    <main className="flex min-h-screen flex-col overflow-hidden   items-center justify-between p-7 lg:p-24">
+      <section className="max-w-screen-xl">
         <div className="grid max-w-screen-xl px-4 py-8 mx-suto  lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
           <div className="mr-auto place-self-center lg:col-span-7">
             <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
@@ -108,7 +178,7 @@ export default function Home() {
                 </button>
               </div>
             </div>
-            <div className="lg:col-span-2 lg:py-8">
+            <div className="lg:col-span-2 ">
               <Slider {...settings}>
                 {products &&
                   products
@@ -163,7 +233,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className="relative lg:px-20 text-center mt-10">
+        <div className="relative lg:px-20 mb-10 text-center mt-10">
           <img
             src={guyhorizontal_secon_banner.src}
             className="hidden lg:block w-[100%] h-[auto]"
@@ -190,7 +260,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
+        <div className=" hidden lg:block max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
           <div className="text-center">
             <h2 className="text-xl font-bold text-gray-950 sm:text-3xl">
               SHOP BY CATEGORY
@@ -273,27 +343,42 @@ export default function Home() {
             </button>
           </div>
         </div>
-          <h1 className="text-3xl font-bold">Explore More</h1>
-          <div className=" flex gap-3 overflow-x-hidden">
-            {products &&
-              products
-                .map((productItem) => (
+        <div className=" text-center mt-10 w-full">
+          <h1 className=" font-bold text-3xl">Explore More</h1>
+        </div>
+        <div className="grid grid-cols-1 mt-5 item-center gap-4">
+          <div className=" col-span-1 lg:py-8">
+            <Slider {...settings2}>
+              {products &&
+                products.map((productItem) => (
                   <div
                     onClick={() => router.push(`/product/${productItem._id}`)}
-                    className="cursor-pointer mx-2"
+                    className="cursor-pointer "
                     key={productItem._id}
                   >
-                    <div className="w-32 h-32 rounded-md">
+                    <div className="mr-5">
                       <img
                         src={productItem.imageUrl}
                         alt="Sale Product Item"
-                        className="object-cover w-full h-full"
+                        className="object-cover h-[160px]  w-full rounded-t-md"
                       />
+                    </div>
+                    <div className="mt-1  mr-5 p-1">
+                      <h5 className="font-normal text-xs text-gray-900">
+                        {productItem.name}
+                      </h5>
+                      <p className="mt-1 text-xs text-gray-800">
+                        $ {productItem.price}{" "}
+                        <span className="text-red-700">
+                          {productItem.onSale === "yes" ? `(-${productItem.priceDrop}%) Off` : ""}
+                        </span>
+                      </p>
                     </div>
                   </div>
                 ))}
+            </Slider>
           </div>
-
+        </div>
       </section>
     </main>
   );

@@ -11,6 +11,14 @@ const productSchema = new mongoose.Schema(
     onSale: String,
     priceDrop: Number,
     imageUrl: String,
+    company: {
+      type: String,
+      default: "UM",
+    },
+    collection: {
+      type: String,
+      default: "None",
+    },
   },
   { timestamps: true }
 );
