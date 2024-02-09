@@ -370,7 +370,9 @@ export default function Home() {
                       <p className="mt-1 text-xs text-gray-800">
                         $ {productItem.price}{" "}
                         <span className="text-red-700">
-                          {productItem.onSale === "yes" ? `(-${productItem.priceDrop}%) Off` : ""}
+                          {productItem.onSale === "yes"
+                            ? `(-${productItem.priceDrop}%) Off`
+                            : ""}
                         </span>
                       </p>
                     </div>

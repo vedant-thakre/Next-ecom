@@ -12,7 +12,7 @@ import React from 'react'
 const Footer = () => {
   const router = useRouter();
   return (
-    <div className="flex flex-col gap-8 px-8 items-center py-14 lg:px-10 xl:px-32 bg-gray-100">
+    <div className="flex flex-col gap-8 px-8 text-center items-center py-14 lg:px-10 xl:px-32 bg-gray-100">
       {/* colums */}
       <div className="grid grid-cols-4">
         <div className="flex flex-col gap-3">
@@ -90,7 +90,7 @@ const Footer = () => {
           onClick={() => router.push("https://www.facebook.com")}
         />
       </div>
-      <p className=" text-xs tracking-wide text-gray-600">
+      <p className="text-center text-xs tracking-wide text-gray-600">
         The content of this site is copyright-protected and is the property of U
         & M Hennes & Mauritz AB.
       </p>
