@@ -53,7 +53,7 @@ const ProductButtons = ({item}) => {
       setShowCartModal(true);
     }
 
-    console.log(res);
+
   }
 
 

@@ -96,6 +96,26 @@ export const productByCategory = async (id) => {
   }
 };
 
+// get products by category
+export const productByCollection = async (id) => {
+  try {
+    const res = await fetch(
+      `http://localhost:3000/api/collection?id=${id}`,
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
+
+    const data = await res.json();
+
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+
 // product by sale
 
 export const productBySale = async (id) => {

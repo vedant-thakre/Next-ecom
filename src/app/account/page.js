@@ -29,7 +29,6 @@ export default function Account() {
   const router = useRouter();
 
   async function extractAllAddresses() {
-    console.log(user);
     setpageLoader(true);
     const res = await fetchAllAddresses(user?._id);
 
@@ -50,7 +49,7 @@ export default function Account() {
           })
         : await addNewAddress({ ...addressFormData, userID: user?._id });
 
-    console.log(res);
+
 
     if (res.success) {
       setComponentLoader({ loading: false, id: "" });

@@ -12,7 +12,7 @@ const ProductTile = ({ item }) => {
         <img
           src={item.imageUrl}
           alt="Product Image"
-          className="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
+          className={`h-full w-full object-cover ${item?.collection !== "none" ? 'object-top': ""} transition-all duration-300 group-hover:scale-125`}
         />
       </div>
       {item.onSale == "yes" ? (

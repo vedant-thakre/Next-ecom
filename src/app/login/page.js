@@ -37,7 +37,6 @@ const Login = () => {
     setComponentLoader({ loading: true, id: "" });
     const res = await loginNewUser(formData);
 
-    console.log(res);
 
     if (res.success) {
       toast.success(res.message);

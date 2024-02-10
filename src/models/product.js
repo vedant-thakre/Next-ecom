@@ -17,7 +17,7 @@ const productSchema = new mongoose.Schema(
     },
     collection: {
       type: String,
-      default: "None",
+      default: "none",
     },
   },
   { timestamps: true }

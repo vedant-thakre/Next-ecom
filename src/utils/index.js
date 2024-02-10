@@ -125,6 +125,31 @@ export const adminAddProductformControls = [
     componentType: "input",
   },
   {
+    id: "collection",
+    type: "",
+    placeholder: "",
+    label: "Collection",
+    componentType: "select",
+    options: [
+      {
+        id: "none",
+        label: "None",
+      },
+      {
+        id: "seasonal-sophistication",
+        label: "Seasonal sophistication",
+      },
+      {
+        id: "new-arrivals",
+        label: "New arrivals",
+      },
+      {
+        id: "fresh-feb",
+        label: "Fresh feb",
+      },
+    ],
+  },
+  {
     id: "category",
     type: "",
     placeholder: "",
@@ -146,11 +171,28 @@ export const adminAddProductformControls = [
     ],
   },
   {
-    id: "deliveryInfo",
+    id: "company",
     type: "text",
-    placeholder: "Enter deliveryInfo",
-    label: "Delivery Info",
+    placeholder: "Enter company",
+    label: "Company",
     componentType: "input",
+  },
+  {
+    id: "deliveryInfo",
+    type: "number",
+    placeholder: "",
+    label: "Delivery Info",
+    componentType: "select",
+    options: [
+      {
+        id: "0",
+        label: "Free Delivery ( 7 Days)",
+      },
+      {
+        id: "10",
+        label: "Fast Delivery ( 2-3 Days ) ",
+      },
+    ],
   },
   {
     id: "onSale",

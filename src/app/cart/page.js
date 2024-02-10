@@ -3,7 +3,7 @@
 
 import CommonCart from "@/components/CommonCart";
 import { GlobalContext } from "@/context";
-import { deleteFromCart, getAllCartItems } from "@/services/cart";
+import { DecrementItemQuantity, IncrementItemQuantity, deleteFromCart, getAllCartItems } from "@/services/cart";
 import { useContext, useEffect } from "react";
 import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
@@ -29,9 +29,9 @@ export default function Cart() {
           ? res.data.map((item) => ({
               ...item,
               productID: {
-                ...item.productID,
+                ...item?.productID,
                 price:
-                  item.productID.onSale === "yes"
+                  item?.productID?.onSale === "yes"
                     ? parseInt(
                         (
                           item.productID.price -
@@ -39,7 +39,7 @@ export default function Cart() {
                             (item.productID.priceDrop / 100)
                         ).toFixed(2)
                       )
-                    : item.productID.price,
+                    : item?.productID?.price,
               },
             }))
           : [];
@@ -47,9 +47,41 @@ export default function Cart() {
       setpageLoader(false);
       localStorage.setItem("cartItems", JSON.stringify(updatedData));
     }
-
-    console.log(res);
   }
+
+  const handleDecrement = async (item) => {
+    if (item.quantity === 1) {
+      handleDeleteCartItem(item._id);
+    } else {
+      const res = await DecrementItemQuantity({
+        id: item._id,
+      });
+
+    
+
+      if (res.success) {
+        setComponentLoader({ loading: false, id: "" });
+        extractAllCartItems();
+      } else {
+        toast.error(res.message);
+        setComponentLoader({ loading: false, id: getCartItemID });
+      }
+    }
+  };
+
+  const handleIncrement = async (item) => {
+    const res = await IncrementItemQuantity({
+      id: item._id,
+    });
+
+    if (res.success) {
+      setComponentLoader({ loading: false, id: "" });
+      extractAllCartItems();
+    } else {
+      toast.error(res.message);
+      setComponentLoader({ loading: false, id: getCartItemID });
+    }
+  };  
 
   useEffect(() => {
     if (user !== null) extractAllCartItems();
@@ -87,6 +119,8 @@ export default function Cart() {
   return (
     <CommonCart
       componentLoader={componentLoader}
+      handleIncrement={handleIncrement}
+      handleDecrement={handleDecrement}
       handleDeleteCartItem={handleDeleteCartItem}
       cartItems={cartItems}
     />

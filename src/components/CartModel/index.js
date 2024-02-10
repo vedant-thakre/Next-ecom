@@ -6,7 +6,7 @@ import { FaPlus, FaMinus } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import { GlobalContext } from "@/context";
 import CommonModal from "../CommonModel";
-import { deleteFromCart, getAllCartItems } from "@/services/cart";
+import { DecrementItemQuantity, IncrementItemQuantity, addToCart, deleteFromCart, getAllCartItems } from "@/services/cart";
 import ComponentLoader from "../Loader/ComponentLoader";
 
 export default function CartModal() {
@@ -31,9 +31,9 @@ export default function CartModal() {
           ? res.data.map((item) => ({
               ...item,
               productID: {
-                ...item.productID,
+                ...item?.productID,
                 price:
-                  item.productID.onSale === "yes"
+                  item?.productID?.onSale === "yes"
                     ? parseInt(
                         (
                           item.productID.price -
@@ -41,7 +41,7 @@ export default function CartModal() {
                             (item.productID.priceDrop / 100)
                         ).toFixed(2)
                       )
-                    : item.productID.price,
+                    : item?.productID?.price,
               },
             }))
           : [];
@@ -49,7 +49,6 @@ export default function CartModal() {
       localStorage.setItem("cartItems", JSON.stringify(updatedData));
     }
 
-    console.log(res);
   };
 
   useEffect(() => {
@@ -72,6 +71,40 @@ export default function CartModal() {
         setComponentLoader({ loading: false, id: getCartItemID });
       }
     }
+
+  const handleDecrement = async (item) => {
+      if(item.quantity === 1){
+        handleDeleteCartItem(item._id);
+      }else{
+         const res = await DecrementItemQuantity({
+           id: item._id,
+         });
+
+
+         if (res.success) {
+           setComponentLoader({ loading: false, id: "" });
+           extractAllCartItems();
+         } else {
+           toast.error(res.message);
+           setComponentLoader({ loading: false, id: getCartItemID });
+         }
+      }
+  }
+
+  const handleIncrement = async (item) => {
+      const res = await IncrementItemQuantity({
+        id: item._id,
+      });
+
+
+      if (res.success) {
+        setComponentLoader({ loading: false, id: "" });
+        extractAllCartItems();
+      } else {
+        toast.error(res.message);
+        setComponentLoader({ loading: false, id: getCartItemID });
+      }
+  };
 
   return (
     <CommonModal
@@ -112,13 +145,19 @@ export default function CartModal() {
                         cartItem.productID.price}
                     </p>
                     <div className="flex gap-2 mt-1 items-center">
-                      <button className="w-4 h-4 border border-gray-400 cursor-pointer rounded-full flex items-center justify-center">
+                      <button
+                        onClick={() => handleIncrement(cartItem)}
+                        className="w-4 h-4 border border-gray-400 cursor-pointer rounded-full flex items-center justify-center"
+                      >
                         <FaPlus className="text-[12px] text-gray-700" />
                       </button>
                       <p className="text-sm text-black">
                         {cartItem && cartItem.quantity}
                       </p>
-                      <button className="w-4 h-4 border cursor-pointer border-gray-400 rounded-full flex items-center justify-center">
+                      <button
+                        onClick={() => handleDecrement(cartItem)}
+                        className="w-4 h-4 border cursor-pointer border-gray-400 rounded-full flex items-center justify-center"
+                      >
                         <FaMinus className="text-[12px] text-gray-700" />
                       </button>
                     </div>
@@ -173,13 +212,13 @@ export default function CartModal() {
             Checkout
           </button>
           <div className="mt-6 flex justify-center text-center text-sm text-gray-600">
-            <button 
-                type="button" 
-                className="font-medium text-grey"
-                onClick={()=> {
-                    router.push("/");
-                    setShowCartModal(false);
-                }}
+            <button
+              type="button"
+              className="font-medium text-grey"
+              onClick={() => {
+                router.push("/");
+                setShowCartModal(false);
+              }}
             >
               Continue Shopping
               <span aria-hidden="true"> &rarr;</span>

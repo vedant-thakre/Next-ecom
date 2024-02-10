@@ -78,8 +78,6 @@ const AdminAddNewProduct = () => {
   } = useContext(GlobalContext);
   const router = useRouter();
 
-  //console.log(currentUpdatedProduct);
-
   useEffect(() => {
     if (currentUpdatedProduct !== null) {
       setFormData(currentUpdatedProduct);
@@ -87,17 +85,33 @@ const AdminAddNewProduct = () => {
   }, [currentUpdatedProduct]);
 
   async function handleImage(e) {
-    const extractImageUrl = await helperForUPloadingImageToFirebase(
-      e.target.files[0]
-    );
+    const file = e.target.files[0];
 
-    if (extractImageUrl !== "") {
-      setFormData({
-        ...formData,
-        imageUrl: extractImageUrl,
-      });
+    if (file) {
+      const allowedFormats = [
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+        "image/jpg",
+      ];
+
+      if (allowedFormats.includes(file.type)) {
+        const extractImageUrl = await helperForUPloadingImageToFirebase(file);
+
+        if (extractImageUrl !== "") {
+          setFormData({
+            ...formData,
+            imageUrl: extractImageUrl,
+          });
+        }
+      } else {
+        console.error(
+          "Invalid image format. Please select a JPEG, PNG, JPG or WEBP file."
+        );
+      }
     }
   }
+
 
   function handleTileClick(getCurrentItem) {
     let cpySizes = [...formData.sizes];
@@ -120,7 +134,7 @@ const AdminAddNewProduct = () => {
     const res =
       currentUpdatedProduct !== null
         ? await updateAProduct(formData)
-        : await addNewProduct(formData);
+        : await addNewProduct(formData);  
 
     if (res.success) {
       setComponentLoader({ loading: false, id: "" });

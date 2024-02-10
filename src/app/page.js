@@ -129,7 +129,6 @@ export default function Home() {
   };
 
 
-  console.log(expoloreProducts);
 
   
 
@@ -213,7 +212,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="relative lg:px-20 mt-10">
+        <div className="relative cursor-pointer md:cursor-default  lg:px-20 mt-10">
           <img
             src={standGirl_firstbannerhorizontal.src}
             className="hidden lg:block w-[100%] h-[auto]"
@@ -228,12 +227,15 @@ export default function Home() {
             <h1 className=" text-white font-bold text-xl  md:text-2xl lg:text-4xl ">
               New Arrivals
             </h1>
-            <button className="hidden lg:block text-black cursor-pointer py-1.5 bg-white font-semibold text-sm px-2">
+            <button
+              onClick={() => router.push("/collection/new-arrivals")}
+              className="hidden hover:bg-gray-100 lg:block text-black cursor-pointer py-1.5 bg-white font-semibold text-sm px-2"
+            >
               Shop Now
             </button>
           </div>
         </div>
-        <div className="relative lg:px-20 mb-10 text-center mt-10">
+        <div className="relative lg:px-20 cursor-pointer md:cursor-default  mb-10 text-center mt-10">
           <img
             src={guyhorizontal_secon_banner.src}
             className="hidden lg:block w-[100%] h-[auto]"
@@ -255,7 +257,10 @@ export default function Home() {
               Minimalist layers with clean lines and classic sartorial
               silhouettes.
             </p>
-            <button className="hidden lg:block text-black cursor-pointer py-1.5 bg-white font-semibold text-sm px-2">
+            <button
+              onClick={() => router.push("/collection/seasonal-sophistication")}
+              className="hidden hover:bg-gray-100 lg:block text-black cursor-pointer py-1.5 bg-white font-semibold text-sm px-2"
+            >
               Shop Now
             </button>
           </div>
@@ -320,7 +325,7 @@ export default function Home() {
             </li>
           </ul>
         </div>
-        <div className="relative lg:px-20 text-center">
+        <div className="relative cursor-pointer md:cursor-default lg:px-20 text-center">
           <img
             src={whitegirl_thirdbannerhorizontal.src}
             className="hidden lg:block w-[100%] h-[auto]"
@@ -338,7 +343,10 @@ export default function Home() {
             <p className="text-white font-small tracking-wider text-[10px] md:text-sm  ">
               Bestseller of the season
             </p>
-            <button className="hidden md:block text-black cursor-pointer py-1.5 bg-white font-semibold text-sm px-2">
+            <button
+              onClick={() => router.push("/collection/fresh-feb")}
+              className="hidden hover:bg-gray-100 md:block text-black cursor-pointer py-1.5 bg-white font-semibold text-sm px-2"
+            >
               Shop Now
             </button>
           </div>

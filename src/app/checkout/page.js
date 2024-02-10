@@ -33,7 +33,6 @@ export default function Checkout() {
 
   const stripePromise = loadStripe( process.env.PUBLISHABLE_KEY);
 
-  console.log(cartItems);
 
   async function getAllAddresses() {
     const res = await fetchAllAddresses(user?._id);
@@ -148,7 +147,7 @@ export default function Checkout() {
     console.log(error);
   }
 
-  console.log(checkoutFormData);
+
 
   useEffect(() => {
     if (orderSuccess) {
@@ -213,7 +212,9 @@ export default function Checkout() {
                   <img
                     src={item && item.productID && item.productID.imageUrl}
                     alt="Cart Item"
-                    className="m-2 h-24 w-28 rounded-md border object-cover object-center"
+                    className={`m-2 h-24 w-40 rounded-lg object-cover ${
+                      item.productID.collection !== "none" ? "object-top" : ""
+                    }`}
                   />
                   <div className="flex w-full flex-col px-4 py-4">
                     <span className="font-bold">

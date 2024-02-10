@@ -18,6 +18,8 @@ const AddNewProductSchema = Joi.object({
   onSale: Joi.string().required(),
   priceDrop: Joi.number().required(),
   imageUrl: Joi.string().required(),
+  company: Joi.string().required(),
+  collection: Joi.string().required(),
 });
 
 export async function POST(req){
@@ -41,6 +43,8 @@ export async function POST(req){
             priceDrop,
             sizes,
             category,
+            company,
+            collection,
           } = extractData;
 
           const { error } = AddNewProductSchema.validate({
@@ -53,6 +57,8 @@ export async function POST(req){
             priceDrop,
             sizes,
             category,
+            company,
+            collection,
           });
 
           if (error) {

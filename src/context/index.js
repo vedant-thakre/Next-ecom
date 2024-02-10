@@ -13,7 +13,7 @@ export const initialCheckoutFormData = {
   paidAt: new Date(),
   isProcessing: true,
 };
-const protectedRoutes = ["/cart", "/checkout", "/account", "/orders", "/admin-view"];
+const protectedRoutes = ["cart", "checkout", "account", "orders", "admin-view"];
 
 const protectedAdminRoutes = [
   "/admin-view",
@@ -61,7 +61,7 @@ export default function GlobalState({ children }) {
       setCartItems(getCartItems);
     } else {
       setIsAuthUser(false);
-      setUser({}); // unauthenticated user
+      setUser({}); 
     }
   }, [Cookies]);
 

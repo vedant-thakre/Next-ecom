@@ -66,8 +66,6 @@ export async function POST(req) {
 
       const saveProductToCart = await Cart.create(data);
 
-      console.log(saveProductToCart);
-
       if (saveProductToCart) {
         return NextResponse.json({
           success: true,

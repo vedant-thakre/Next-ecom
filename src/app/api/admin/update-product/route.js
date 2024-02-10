@@ -25,6 +25,8 @@ export async function PUT(req) {
         onSale,
         priceDrop,
         imageUrl,
+        company,
+        collection,
       } = extractData;
 
       const updatedProduct = await Product.findOneAndUpdate(
@@ -41,6 +43,8 @@ export async function PUT(req) {
           onSale,
           priceDrop,
           imageUrl,
+          company,
+          collection,
         },
         { new: true }
       );

@@ -1,7 +1,12 @@
 "use client";
 
 import { GlobalContext } from "@/context";
-import { adminNavOptions, navOptions } from "@/utils";
+import { adminNavOptions, navOptions } from "@/utils"
+import { FaRegUserCircle } from "react-icons/fa";
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
+import { RiAdminLine, RiUserLine } from "react-icons/ri";
+
 import React, { useContext, useEffect } from "react";
 import CommonModal from "../CommonModel";
 import Cookies from "js-cookie";
@@ -9,10 +14,14 @@ import { usePathname, useRouter } from "next/navigation";
 import CartModal from "../CartModel";
 
 
-const NavItems = ({ isModalView = false, isAdminView, router}) => {
+const NavItems = ({ isModalView = false, router}) => {
+
+  const pathName = usePathname();
+  const isAdmin = pathName.includes("admin-view");
+
   return (
     <div
-      className={`item-center  justify-between w-full md:flex md:w-auto
+      className={`item-center  justify-between w-full lg:flex lg:w-auto
       ${isModalView ? "" : "hidden"}`}
       id="nav-items"
     >
@@ -20,7 +29,7 @@ const NavItems = ({ isModalView = false, isAdminView, router}) => {
         className={`flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg md:flex-row
            md:space-x-8 md:mt-0 md:bottom-0 bg-white `}
       >
-        {isAdminView
+        {isAdmin
           ? adminNavOptions.map((item) => (
               <li
                 className=" cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded-md md:p-0"
@@ -94,59 +103,75 @@ const Navbar = () => {
           </div>
           <div className="flex md:order-2 gap-2">
             {!isAdminView && isAuthUser ? (
-              <>
-                <buttono
-                  onClick={() => router.push("/account")}
-                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium cursor-pointer  uppercase tracking-white text-white"
-                >
-                  Account
-                </buttono>
-                <button
-                  onClick={() => router.push("/cart")}
-                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium cursor-pointer  uppercase tracking-white text-white"
-                >
-                  Cart
-                </button>
-              </>
+              <div className="flex text-gray-500 mt-2 gap-8 mr-0 lg:mr-2">
+                <div className="relative group">
+                  <FaRegUserCircle
+                    className="cursor-pointer text-xl hover:text-gray-950"
+                    onClick={() => router.push("/account")}
+                  />
+                  <p className="text-[9px] absolute w-40px -left-3 -bottom-7 hidden group-hover:block text-white bg-gray-700 border border-gray-500 p-1 m-0 rounded-md">
+                    Account
+                  </p>
+                </div>
+                <div className="relative group">
+                  <MdOutlineShoppingCart
+                    className="cursor-pointer text-xl hover:text-gray-950"
+                    onClick={() => router.push("/cart")}
+                  />
+                  <p className="text-[9px] absolute w-40px -left-1 -bottom-7 hidden group-hover:block text-white bg-gray-700 border border-gray-500 p-1 m-0 rounded-md">
+                    Cart
+                  </p>
+                </div>
+              </div>
             ) : null}
             {user?.role === "admin" ? (
               isAdminView ? (
-                <button
-                  onClick={() => router.push("/")}
-                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white"
-                >
-                  Client View
-                </button>
+                <div className="relative group  mt-2">
+                  <RiUserLine
+                    className="text-xl mx-4 text-gray-500 hover:text-gray-950 cursor-pointer"
+                    onClick={() => router.push("/")}
+                  />
+                  <p className="text-[9px] absolute w-40px -bottom-7 hidden group-hover:block text-white bg-gray-700 border border-gray-500 p-1 m-0 rounded-md">
+                    ClientView
+                  </p>
+                </div>
               ) : (
-                <button
-                  onClick={() => router.push("/admin-view")}
-                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white"
-                >
-                  Admin View
-                </button>
+                <div className="relative group  mt-2">
+                  <RiAdminLine
+                    className="text-xl mx-4 text-gray-500 hover:text-gray-950 cursor-pointer"
+                    onClick={() => router.push("/admin-view")}
+                  />
+                  <p className="text-[9px] absolute w-40px -bottom-7 hidden group-hover:block text-white bg-gray-700 border border-gray-500 p-1 m-0 rounded-md">
+                    AdminView
+                  </p>
+                </div>
               )
             ) : null}
             {isAuthUser ? (
-              <button
-                onClick={handleLogout}
-                className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white"
-              >
-                Logout
-              </button>
+              <div className="relative group  mt-2">
+                <IoMdLogOut
+                  className="text-xl text-gray-500 hover:text-gray-950 cursor-pointer"
+                  onClick={handleLogout}
+                />
+                <p className="text-[9px] absolute w-40px -bottom-7 -left-2 hidden group-hover:block text-white bg-gray-700 border border-gray-500 p-1 m-0 rounded-md">
+                  Logout
+                </p>
+              </div>
             ) : (
-              <button
-                onClick={() => router.push("/login")}
-                className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium  uppercase tracking-white text-white"
-              >
-                Login
-              </button>
+              <div className="relative group  mt-2">
+                <IoMdLogIn
+                  className="text-xl text-gray-500 hover:text-gray-950 cursor-pointer"
+                  onClick={() => router.push("/login")}
+                />
+                <p className="text-[9px] absolute w-40px -bottom-7 -left-2 hidden group-hover:block text-white bg-gray-700 border border-gray-500 p-1 m-0 rounded-md">
+                  Login
+                </p>
+              </div>
             )}
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
-              className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100
-               focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700
-                dark:focus:ring-gray-600"
+              className="inline-flex cursor-pointer mt-0.5 ml-2 items-center p-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:ring-gray-200 "
               aria-controls="navbar-sticky"
               aria-expanded="false"
               onClick={() => setShowNavModal(true)}

@@ -29,8 +29,6 @@ export default function OrderDetails() {
     } else {
       setpageLoader(false);
     }
-
-    console.log(res);
   }
 
   useEffect(() => {

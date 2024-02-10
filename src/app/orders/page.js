@@ -38,7 +38,7 @@ export default function Orders() {
     if (user !== null) extractAllOrders();
   }, [user]);
 
-  console.log(allOrdersForUser);
+
 
   if (pageLoader) {
     return (
@@ -85,7 +85,11 @@ export default function Orders() {
                             <div key={index} className="shrink-0">
                               <img
                                 alt="Order Item"
-                                className="h-24 w-24 max-w-full rounded-lg object-cover"
+                                className={`h-24 w-36 rounded-lg object-cover ${
+                                  orderItem.product.collection !== "none"
+                                    ? "object-top"
+                                    : ""
+                                }`}
                                 src={
                                   orderItem &&
                                   orderItem.product &&
@@ -97,15 +101,13 @@ export default function Orders() {
                         </div>
                         <div className="flex gap-5">
                           <button className="disabled:opacity-50 mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
-                            {item.isProcessing
-                              ? "Order is Processing"
-                              : "Order is delivered"}
+                            {item.isProcessing ? "Processing" : "Delivered"}
                           </button>
                           <button
                             onClick={() => router.push(`/orders/${item._id}`)}
                             className=" mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
                           >
-                            View Order Details
+                            View Details
                           </button>
                         </div>
                       </li>

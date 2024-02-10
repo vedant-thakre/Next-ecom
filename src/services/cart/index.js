@@ -20,6 +20,46 @@ export const addToCart = async (formData) => {
   }
 };
 
+// Increment the product quantity
+export const IncrementItemQuantity = async (formData) => {
+  try {
+    const res = await fetch("/api/cart/increment-quantity", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// Increment the product quantity
+export const DecrementItemQuantity = async (formData) => {
+  try {
+    const res = await fetch("/api/cart/decrement-quantity", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 // get all product from the cart
 export const getAllCartItems = async (id) => {
   try {
