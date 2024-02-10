@@ -91,7 +91,7 @@ const ProductButtons = ({item}) => {
   ) : (
     <button
       className="mt-1.5 flex w-full justify-center bg-black px-5 py-3 text-xs font-medium
-        uppercase tracking-wide text-white"
+        tracking-wide text-white"
       onClick={() => handleAddToCart(item)}
     >
       {componentLoader &&
@@ -102,7 +102,7 @@ const ProductButtons = ({item}) => {
           loading={componentLoader && componentLoader.loading}
         />
       ) : (
-        "Add to Cart"
+        "Add"
       )}
     </button>
   );

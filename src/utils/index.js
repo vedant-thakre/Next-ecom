@@ -179,17 +179,17 @@ export const adminAddProductformControls = [
   },
   {
     id: "deliveryInfo",
-    type: "number",
+    type: "string",
     placeholder: "",
     label: "Delivery Info",
     componentType: "select",
     options: [
       {
-        id: "0",
+        id: "Free Delivery ",
         label: "Free Delivery ( 7 Days)",
       },
       {
-        id: "10",
+        id: "Free Delivery",
         label: "Fast Delivery ( 2-3 Days ) ",
       },
     ],

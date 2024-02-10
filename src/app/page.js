@@ -128,10 +128,6 @@ export default function Home() {
     ],
   };
 
-
-
-  
-
   return (
     <main className="flex min-h-screen flex-col overflow-hidden   items-center justify-between p-7 lg:p-24">
       <section className="max-w-screen-xl">
