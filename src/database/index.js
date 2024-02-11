@@ -7,8 +7,7 @@ const configOptions = {
 };
 
 const connectDB = async() => {
-    const connectionUrl =
-      "mongodb+srv://vedantthakre7:vedant@cluster0.ig28tkt.mongodb.net/?retryWrites=true&w=majority";
+    const connectionUrl = process.env.MONGO_URI;
 
     mongoose.connect(connectionUrl, configOptions).then(()=>{
         console.log("Database Connected Successfully");
