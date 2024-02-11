@@ -60,7 +60,7 @@ const ProductButtons = ({item}) => {
   return isAdminView ? (
     <>
       <button
-        className="mt-1.5 flex w-full justify-center bg-black px-5 py-3 
+        className="mt-1.5 flex w-full justify-center mb-1 bg-black px-5 py-3 
       text-xs font-medium uppercase tracking-wide text-white"
         onClick={() => {
           setCurrentUpdatedProduct(item);
@@ -70,7 +70,7 @@ const ProductButtons = ({item}) => {
         Update
       </button>
       <button
-        className="mt-1.5 flex w-full justify-center bg-black px-5 py-3 
+        className="flex w-full justify-center bg-black px-5 py-3 
       text-xs font-medium uppercase tracking-wide text-white"
         onClick={() => {
           handleDeleteProduct(item);
@@ -90,7 +90,7 @@ const ProductButtons = ({item}) => {
     </>
   ) : (
     <button
-      className="mt-1.5 flex w-full justify-center bg-black px-5 py-3 text-xs font-medium
+      className=" flex w-full justify-center bg-black px-5 py-3 text-xs font-medium
         tracking-wide text-white"
       onClick={() => handleAddToCart(item)}
     >

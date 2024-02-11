@@ -21,13 +21,13 @@ const NavItems = ({ isModalView = false, router}) => {
 
   return (
     <div
-      className={`item-center  justify-between w-full lg:flex lg:w-auto
+      className={`item-center justify-between w-full md:flex md:w-auto
       ${isModalView ? "" : "hidden"}`}
       id="nav-items"
     >
       <ul
         className={`flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg md:flex-row
-           md:space-x-8 md:mt-0 md:bottom-0 bg-white `}
+           md:space-x-4 md:mt-0 md:bottom-0 bg-white `}
       >
         {isAdmin
           ? adminNavOptions.map((item) => (
@@ -97,13 +97,16 @@ const Navbar = () => {
             onClick={() => router.push("/")}
             className="flex items-center cursor-pointer"
           >
-            <span className="self-center text-xl cursor-pointer lg:text-2xl font-semibold whitespace-nowrap">
+            <span className="self-center hidden sm:block text-xl cursor-pointer lg:text-2xl font-semibold whitespace-nowrap">
               Urbanmarket
+            </span>
+            <span className="self-center block sm:hidden text-xl cursor-pointer lg:text-2xl font-semibold whitespace-nowrap">
+              UM
             </span>
           </div>
           <div className="flex md:order-2 gap-2">
             {!isAdminView && isAuthUser ? (
-              <div className="flex text-gray-500 mt-2 gap-8 mr-0 lg:mr-2">
+              <div className="flex text-gray-500 mt-2 gap-5 md:gap-8 mr-0 lg:mr-2">
                 <div className="relative group">
                   <FaRegUserCircle
                     className="cursor-pointer text-xl hover:text-gray-950"
@@ -128,7 +131,7 @@ const Navbar = () => {
               isAdminView ? (
                 <div className="relative group  mt-2">
                   <RiUserLine
-                    className="text-xl mx-4 text-gray-500 hover:text-gray-950 cursor-pointer"
+                    className="text-xl mx-2 md:mx-4 text-gray-500 hover:text-gray-950 cursor-pointer"
                     onClick={() => router.push("/")}
                   />
                   <p className="text-[9px] absolute w-40px -bottom-7 hidden group-hover:block text-white bg-gray-700 border border-gray-500 p-1 m-0 rounded-md">
@@ -138,7 +141,7 @@ const Navbar = () => {
               ) : (
                 <div className="relative group  mt-2">
                   <RiAdminLine
-                    className="text-xl mx-4 text-gray-500 hover:text-gray-950 cursor-pointer"
+                    className="text-xl mx-2 md:mx-4 text-gray-500 hover:text-gray-950 cursor-pointer"
                     onClick={() => router.push("/admin-view")}
                   />
                   <p className="text-[9px] absolute w-40px -bottom-7 hidden group-hover:block text-white bg-gray-700 border border-gray-500 p-1 m-0 rounded-md">
@@ -171,7 +174,7 @@ const Navbar = () => {
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
-              className="inline-flex cursor-pointer mt-0.5 ml-2 items-center p-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:ring-gray-200 "
+              className="inline-flex cursor-pointer mt-0.5 ml-2 items-center p-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:ring-gray-200 "
               aria-controls="navbar-sticky"
               aria-expanded="false"
               onClick={() => setShowNavModal(true)}

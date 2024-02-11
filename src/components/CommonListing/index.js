@@ -18,7 +18,7 @@ const CommonListing = ({data}) => {
   return (
     <section className="bg-white py-12 sm:py-16 ">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-4 lg:mt-16">
+        <div className="mt-10 grid px-1 sm:px-0 grid-cols-1 gap-6 sm:grid-cols-3 md:grid-cols-4 sm:gap-4 lg:mt-16">
           {data && data.length
             ? data.map((item) => (
                 <article
@@ -32,7 +32,7 @@ const CommonListing = ({data}) => {
             : null}
         </div>
       </div>
-      <Notification/>
+      <Notification />
     </section>
   );
 };

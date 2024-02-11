@@ -129,7 +129,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col overflow-hidden   items-center justify-between p-7 lg:p-24">
+    <main className="flex min-h-screen flex-col overflow-hidden mb-6  items-center justify-between p-4 md:p-16 lg:p-24">
       <section className="max-w-screen-xl">
         <div className="grid max-w-screen-xl px-4 py-8 mx-suto  lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
           <div className="mr-auto place-self-center lg:col-span-7">
@@ -156,7 +156,7 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="max-w-screen-xl px-4 py-8 mx-auto sm:py-12 sm:px-6 lg:px-8">
+        <div className="max-w-screen-xl md:px-4 py-8 mx-auto sm:py-12 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-stretch">
             <div className="grid p-6 bg-gray-100 rounded place-content-center sm:p-8">
               <div className="max-w-md mx-auto text-center lg:text-left">
@@ -167,13 +167,13 @@ export default function Home() {
                 </div>
                 <button
                   onClick={() => router.push("/product/listing/all-products")}
-                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
+                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium cursor-pointer uppercase tracking-wide text-white"
                 >
                   Shop ALL
                 </button>
               </div>
             </div>
-            <div className="lg:col-span-2 ">
+            <div className="lg:col-span-2 ml-2 sm:ml-0">
               <Slider {...settings}>
                 {products &&
                   products
@@ -190,7 +190,11 @@ export default function Home() {
                           <img
                             src={productItem.imageUrl}
                             alt="Sale Product Item"
-                            className="object-cover w-full rounded-t-md aspect-square"
+                            className={`object-cover w-full ${
+                              productItem?.collection !== "none"
+                                ? "object-top"
+                                : ""
+                            } rounded-t-md aspect-square`}
                           />
                         </div>
                         <div className="mt-1  mr-5 p-1">
@@ -208,7 +212,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="relative cursor-pointer md:cursor-default  lg:px-20 mt-10">
+        <div
+          className="relative cursor-pointer md:cursor-defaultlg:px-20 mt-10"
+          onClick={() => router.push("/collection/new-arrivals")}
+        >
           <img
             src={standGirl_firstbannerhorizontal.src}
             className="hidden lg:block w-[100%] h-[auto]"
@@ -231,7 +238,10 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className="relative lg:px-20 cursor-pointer md:cursor-default  mb-10 text-center mt-10">
+        <div
+          onClick={() => router.push("/collection/seasonal-sophistication")}
+          className="relative lg:px-20 cursor-pointer md:cursor-default  mb-10 text-center mt-10"
+        >
           <img
             src={guyhorizontal_secon_banner.src}
             className="hidden lg:block w-[100%] h-[auto]"
@@ -321,7 +331,10 @@ export default function Home() {
             </li>
           </ul>
         </div>
-        <div className="relative cursor-pointer md:cursor-default lg:px-20 text-center">
+        <div
+          onClick={() => router.push("/collection/fresh-feb")}
+          className="relative cursor-pointer md:cursor-default lg:px-20 text-center"
+        >
           <img
             src={whitegirl_thirdbannerhorizontal.src}
             className="hidden lg:block w-[100%] h-[auto]"
@@ -339,16 +352,13 @@ export default function Home() {
             <p className="text-white font-small tracking-wider text-[10px] md:text-sm  ">
               Bestseller of the season
             </p>
-            <button
-              onClick={() => router.push("/collection/fresh-feb")}
-              className="hidden hover:bg-gray-100 md:block text-black cursor-pointer py-1.5 bg-white font-semibold text-sm px-2"
-            >
+            <button className="hidden hover:bg-gray-100 md:block text-black cursor-pointer py-1.5 bg-white font-semibold text-sm px-2">
               Shop Now
             </button>
           </div>
         </div>
         <div className=" text-center mt-10 w-full">
-          <h1 className=" font-bold text-3xl">Explore More</h1>
+          <h1 className=" font-bold text-2xl sm:text-3xl">Explore More</h1>
         </div>
         <div className="grid grid-cols-1 mt-5 item-center gap-4">
           <div className=" col-span-1 lg:py-8">
@@ -364,7 +374,9 @@ export default function Home() {
                       <img
                         src={productItem.imageUrl}
                         alt="Sale Product Item"
-                        className="object-cover h-[160px]  w-full rounded-t-md"
+                        className={`object-cover ${
+                          productItem?.collection !== "none" ? "object-top" : ""
+                        } h-[160px] w-full rounded-t-md`}
                       />
                     </div>
                     <div className="mt-1  mr-5 p-1">

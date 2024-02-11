@@ -109,6 +109,9 @@ export default function CommonDetails({ item }) {
     }
   }
 
+const randomIndex = Math.floor(Math.random() * (products.length - 4)) + 4;
+
+
   useEffect(() => {
     async function getListOfProducts() {
       if (item.collection !== "none") {
@@ -237,42 +240,40 @@ export default function CommonDetails({ item }) {
           <h1>You May Also Like</h1>
         </div>
         <div className="w-full my-5 h-[1px] bg-gray-500"></div>
-        <div className="w-full h-[300px] oveflw">
-          <div>
-            <Slider {...settings2}>
-              {products &&
-                products.map((productItem) => (
-                  <div
-                    onClick={() => router.push(`/product/${productItem._id}`)}
-                    className="cursor-pointer"
-                    key={productItem._id}
-                  >
-                    <div className="mr-5">
-                      <img
-                        src={productItem.imageUrl}
-                        alt="Sale Product Item"
-                        className={`object-cover ${
-                          productItem.collection !== "none" ? "object-top" : ""
-                        } w-full rounded-t-md aspect-square`}
-                      />
-                    </div>
-                    <div className="mt-1  mr-5 p-1">
-                      <h5 className="font-normal text-xs text-gray-900">
-                        {productItem.name}
-                      </h5>
-                      <p className="mt-1 text-xs text-gray-800">
-                        $ {productItem.price}{" "}
-                        {productItem.onSale === "yes" ? (
-                          <span className="text-red-700">{`(-${productItem.priceDrop}%) Off`}</span>
-                        ) : (
-                          <></>
-                        )}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-            </Slider>
-          </div>
+        <div className="flex w-full overflow-hidden">
+          {products &&
+            products
+            .slice(randomIndex-4, randomIndex)
+            .map((productItem) => (
+              <div
+                onClick={() => router.push(`/product/${productItem._id}`)}
+                className="cursor-pointer"
+                key={productItem._id}
+              >
+                <div className="mr-5">
+                  <img
+                    src={productItem.imageUrl}
+                    alt="Sale Product Item"
+                    className={`object-cover h-[180px]  ${
+                      productItem.collection !== "none" ? "object-top" : ""
+                    } rounded-t-md w-full aspect-video`}
+                  />
+                </div>
+                <div className="mt-1  mr-5 p-1">
+                  <h5 className="font-normal text-xs text-gray-900">
+                    {productItem.name}
+                  </h5>
+                  <p className="mt-1 text-xs text-gray-800">
+                    $ {productItem.price}{" "}
+                    {productItem.onSale === "yes" ? (
+                      <span className="text-red-700">{`(-${productItem.priceDrop}%) Off`}</span>
+                    ) : (
+                      <></>
+                    )}
+                  </p>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
       <Notification />

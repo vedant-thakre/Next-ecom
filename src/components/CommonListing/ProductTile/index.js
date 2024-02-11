@@ -12,7 +12,9 @@ const ProductTile = ({ item }) => {
         <img
           src={item.imageUrl}
           alt="Product Image"
-          className={`h-full w-full object-cover ${item?.collection !== "none" ? 'object-top': ""} transition-all duration-300 group-hover:scale-125`}
+          className={`h-full w-full object-cover ${
+            item?.collection !== "none" ? "object-top" : ""
+          } transition-all duration-300 group-hover:scale-125`}
         />
       </div>
       {item.onSale == "yes" ? (
@@ -20,38 +22,40 @@ const ProductTile = ({ item }) => {
           <p
             className={` bg-red-600 ${
               isSalePage ? `text-[9px]` : "text-[8px]"
-            } font-bold uppercase tracking-wide text-white sm:py-1 sm:px-2`}
+            } font-bold uppercase tracking-wide text-white px-1 py-0.5`}
           >
             {isSalePage ? `-${item.priceDrop}%` : "Sale"}
           </p>
         </div>
       ) : null}
-      <div className="my-4 mx-auto flex w-10/12 flex-col items-start justify-between ">
-        <div className="mb-2 flex">
-          {item.onSale === "yes" ? (
-            <>
-              <p className="mr-3 text-sm font-semibold ">{`$ ${(
-                item.price -
-                item.price * (item.priceDrop / 100)
-              ).toFixed(2)}`}</p>
+      <div className="my-3 mx-auto flex w-10/12 flex-col items-start justify-between ">
+        <div className="mb-2 flex flex-col">
+          <h3 className="font-normal text-xs text-gray-900">{item.name}</h3>
+          <div className="flex gap-2">
+            {item.onSale === "yes" ? (
+              <>
+                <p className="mt-1 text-[10px] text-gray-800 ">{`$ ${(
+                  item.price -
+                  item.price * (item.priceDrop / 100)
+                ).toFixed(2)}`}</p>
+                <p
+                  className={`mt-1 text-[10px] text-gray-800 ${
+                    item.onSale === "yes" ? "line-through text-gray-400" : ""
+                  }`}
+                >{`$ ${item.price}`}</p>
+              </>
+            ) : (
               <p
-                className={`mr-3 text-sm font-semibold ${
-                  item.onSale === "yes" ? "line-through text-gray-500" : ""
+                className={`mt-1 text-[10px] text-gray-800 ${
+                  item.onSale === "yes" ? "line-through text-gray-400" : ""
                 }`}
               >{`$ ${item.price}`}</p>
-            </>
-          ) : (
-            <p
-              className={`mr-3 text-sm font-semibold ${
-                item.onSale === "yes" ? "line-through text-gray-500" : ""
-              }`}
-            >{`$ ${item.price}`}</p>
-          )}
-          {item.onSale === "yes" ? (
-            <p className="mr-3 text-sm font-semibold text-red-700">{`-(${item.priceDrop}%)off`}</p>
-          ) : null}
+            )}
+            {item.onSale === "yes" ? (
+              <p className="mt-1 hidden md:block text-[10px] text-red-700">{`-(${item.priceDrop}%)off`}</p>
+            ) : null}
+          </div>
         </div>
-        <h3 className="md-2 text-gray-400 text-sm">{item.name}</h3>
       </div>
     </div>
   );

@@ -212,7 +212,15 @@ const Footer = () => {
       >
         UM
       </h1>
-      <h3 className="font-medium">INDIA | Rs.</h3>
+      <h3 className="font-medium text-md ">
+        MADE BY |{" "}
+        <span
+          className="cursor-pointer"
+          onClick={() => router.push("https://github.com/vedant-thakre")}
+        >
+          @VEDANT
+        </span>
+      </h3>
     </div>
   );
 };
