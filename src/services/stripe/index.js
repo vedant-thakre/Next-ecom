@@ -1,6 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
+// Next auth url updated
 export const callStripeSession = async (formData) => {
   try {
     const res = await axios.post("/api/stripe", formData, {
