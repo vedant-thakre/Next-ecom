@@ -1,157 +1,145 @@
-
-// add a new product
-
+import axios from "axios";
 import Cookies from "js-cookie";
 
-export const addNewProduct = async (formdata) => {
+// Add a new product
+export const addNewProduct = async (formData) => {
   try {
-    const res = await fetch("/api/admin/add-product", {
-      method: "POST",
+    const res = await axios.post("/api/admin/add-product", formData, {
       headers: {
-        "content-type": "application/json",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
-      body: JSON.stringify(formdata),
     });
-    const data = await res.json();
-    return data;
+
+    return res.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
-// get all products
-
+// Get all products
 export const getAllAdminProducts = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/admin/all-products", {
-      method: "GET",
-      cache: "no-store",
-    });
+    const res = await axios.get(
+      "http://localhost:3000/api/admin/all-products",
+      {
+        method: "GET",
+        headers: {
+          "Cache-Control": "no-store",
+        },
+      }
+    );
 
-    const data = await res.json();
-
-    return data;
+    return res.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
-// update product
-
+// Update a product
 export const updateAProduct = async (formData) => {
   try {
-    const res = await fetch("/api/admin/update-product", {
-      method: "PUT",
+    const res = await axios.put("/api/admin/update-product", formData, {
       headers: {
-        "content-type": "application/json",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
       cache: "no-store",
-      body: JSON.stringify(formData),
     });
 
-    const data = await res.json();
-
-    return data;
-  } catch (e) {
-    console.log(e);
+    return res.data;
+  } catch (error) {
+    console.error(error);
   }
 };
 
-// delete a product
+// Delete a product
 export const deleteAProduct = async (id) => {
   try {
-    const res = await fetch(`/api/admin/delete-product?id=${id}`, {
-      method: "DELETE",
+    const res = await axios.delete(`/api/admin/delete-product?id=${id}`, {
       headers: {
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
     });
 
-    const data = await res.json();
-
-    return data;
-  } catch (e) {
-    console.log(e);
+    return res.data;
+  } catch (error) {
+    console.error(error);
   }
 };
 
-// get products by category
+// Get products by category
 export const productByCategory = async (id) => {
   try {
-    const res = await fetch(
+    const res = await axios.get(
       `http://localhost:3000/api/admin/product-by-category?id=${id}`,
       {
         method: "GET",
-        cache: "no-store",
+        headers: {
+          "Cache-Control": "no-store",
+        },
       }
     );
 
-    const data = await res.json();
-
-    return data;
-  } catch (e) {
-    console.log(e);
+    return res.data;
+  } catch (error) {
+    console.error(error);
   }
 };
 
-// get products by category
+// Get products by collection
 export const productByCollection = async (id) => {
   try {
-    const res = await fetch(
+    const res = await axios.get(
       `http://localhost:3000/api/collection?id=${id}`,
       {
         method: "GET",
-        cache: "no-store",
+        headers: {
+          "Cache-Control": "no-store",
+        },
       }
     );
 
-    const data = await res.json();
-
-    return data;
-  } catch (e) {
-    console.log(e);
+    return res.data;
+  } catch (error) {
+    console.error(error);
   }
 };
 
-
-// product by sale
-
+// Products by sale
 export const productBySale = async (id) => {
   try {
-    const res = await fetch(
+    const res = await axios.get(
       `http://localhost:3000/api/admin/on-sale?id=${id}`,
       {
         method: "GET",
-        cache: "no-store",
+        headers: {
+          "Cache-Control": "no-store",
+        },
       }
     );
 
-    const data = await res.json();
-
-    return data;
-  } catch (e) {
-    console.log(e);
+    return res.data;
+  } catch (error) {
+    console.error(error);
   }
 };
 
-// get product by id
-
+// Get product by ID
 export const productById = async (id) => {
   try {
-    const res = await fetch(
+    const res = await axios.get(
       `http://localhost:3000/api/admin/product-by-id?id=${id}`,
       {
         method: "GET",
-        cache: "no-store",
+        headers: {
+          "Cache-Control": "no-store",
+        },
       }
     );
 
-    const data = await res.json();
-
-    return data;
-  } catch (e) {
-    console.log(e);
+    return res.data;
+  } catch (error) {
+    console.error(error);
   }
 };
