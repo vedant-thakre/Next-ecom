@@ -12,7 +12,6 @@ const nextConfig = {
     MEASUREMENT_ID: process.env.MEASUREMENT_ID,
     FIREBASE_STORAGE_URL: process.env.FIREBASE_STORAGE_URL,
     MONGO_URI: process.env.MONGO_URI,
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   },
 };
 
