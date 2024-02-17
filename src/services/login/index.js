@@ -1,14 +1,15 @@
-import axios from "axios";
-
 export const loginNewUser = async (formData) => {
   try {
-    const res = await axios.post("/api/login", formData, {
+    const res = await fetch("/api/login", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify(formData),
     });
 
-    return res.data;
+    const data = await res.json();
+    return data;
   } catch (error) {
     console.error("Error: ", error);
   }

@@ -1,20 +1,19 @@
-import axios from "axios";
-import Cookies from "js-cookie";
-
-// Next auth url updated
 export const callStripeSession = async (formData) => {
   try {
-    const res = await axios.post("/api/stripe", formData, {
+    const res = await fetch("/api/stripe", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
+      body: JSON.stringify(formData),
     });
 
-    console.log(res);
+    const data = await res.json();
+    console.log(data);
 
-    return res.data;
+    return data;
   } catch (error) {
-    console.log("Error:", error);
+    console.error("Error:", error);
   }
 };
