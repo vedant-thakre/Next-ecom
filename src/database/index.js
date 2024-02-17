@@ -1,19 +1,22 @@
 import mongoose from "mongoose";
-import colors from 'colors';
+import colors from "colors";
 
 const configOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
 
-const connectDB = async() => {
+const connectDB = async () => {
+  try {
     const connectionUrl = process.env.MONGO_URI;
 
-    mongoose.connect(connectionUrl, configOptions).then(()=>{
-        console.log("Database Connected Successfully");
-    }).catch((err) => {
-        console.log(`Getting Error in connecting the database : ${err.message}`.yellow.bold);
-    });  
-}
+    await mongoose.connect(connectionUrl, configOptions);
+    console.log("Database Connected Successfully");
+  } catch (error) {
+    console.error(
+      `Error connecting to the database: ${error.message}`.red.bold
+    );
+  }
+};
 
 export default connectDB;

@@ -26,7 +26,7 @@ const NavItems = ({ isModalView = false, router}) => {
       id="nav-items"
     >
       <ul
-        className={`flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg md:flex-row
+        className={`flex flex-col gap-0 lg:gap-4 p-4 md:p-0 mt-4 font-medium rounded-lg md:flex-row
            md:space-x-4 md:mt-0 md:bottom-0 bg-white `}
       >
         {isAdmin
