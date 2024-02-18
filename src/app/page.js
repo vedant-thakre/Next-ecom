@@ -14,7 +14,6 @@ import { useRouter } from "next/navigation";
 import { GlobalContext } from "@/context";
 import { getAllAdminProducts, productByCategory } from "@/services/product";
 
-
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (

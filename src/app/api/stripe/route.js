@@ -1,9 +1,7 @@
 import AuthUser from "@/middleware/AuthUser";
 import { NextResponse } from "next/server";
-import stripe from "stripe";
-import { URL } from "url";
 
-const stripeInstance = stripe(process.env.SECRET_KEY);
+const stripe = require("stripe")(process.env.SECRET_KEY);
 
 export const dynamic = "force-dynamic";
 
@@ -13,16 +11,12 @@ export async function POST(req) {
     if (isAuthUser) {
       const res = await req.json();
 
-      const session = await stripeInstance.checkout.sessions.create({
+      const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         line_items: res,
         mode: "payment",
-        success_url:
-          new URL("/checkout", process.env.NEXTAUTH_URL).toString() +
-          "?status=success",
-        cancel_url:
-          new URL("/checkout", process.env.NEXTAUTH_URL).toString() +
-          "?status=cancel",
+        success_url: `${process.env.NEXTAUTH_URL}/checkout` + "?status=success",
+        cancel_url: `${process.env.NEXTAUTH_URL}/checkout` + "?status=cancel",
       });
 
       return NextResponse.json({
@@ -31,15 +25,16 @@ export async function POST(req) {
       });
     } else {
       return NextResponse.json({
-        success: false,
-        message: "You are not authenticated.",
+        success: true,
+        message: "You are not authenticated",
       });
     }
-  } catch (error) {
-    console.error("Error in checkout session creation:", error);
+  } catch (e) {
+    console.log(e);
     return NextResponse.json({
+      status: 500,
       success: false,
-      message: "Something went wrong! Please try again.",
+      message: "Something went wrong ! Please try again",
     });
   }
 }

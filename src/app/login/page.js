@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import React, { useContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 
+
 const initialState = {
   email: "",
   password: "",
@@ -37,7 +38,7 @@ const Login = () => {
     setComponentLoader({ loading: true, id: "" });
     const res = await loginNewUser(formData);
 
-
+    console.log(res);
     if (res.success) {
       toast.success(res.message);
       setIsAuthUser(true);
