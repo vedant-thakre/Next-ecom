@@ -15,8 +15,12 @@ export async function POST(req) {
         payment_method_types: ["card"],
         line_items: res,
         mode: "payment",
-        success_url: `${process.env.NEXTAUTH_URL}/checkout` + "?status=success",
-        cancel_url: `${process.env.NEXTAUTH_URL}/checkout` + "?status=cancel",
+        success_url:
+          `https://urban-market-lok9s05jc-ved-thakre.vercel.app/checkout` +
+          "?status=success",
+        cancel_url:
+          `https://urban-market-lok9s05jc-ved-thakre.vercel.app/checkout` +
+          "?status=cancel",
       });
 
       return NextResponse.json({

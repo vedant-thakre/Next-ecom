@@ -21,7 +21,7 @@ export const addNewProduct = async (formData) => {
 export const getAllAdminProducts = async () => {
   try {
     const res = await axios.get(
-      `${process.env.NEXTAUTH_URL}/api/admin/all-products`,
+      `https://urban-market-lok9s05jc-ved-thakre.vercel.app/api/admin/all-products`,
       {
         method: "GET",
         headers: {
@@ -72,7 +72,7 @@ export const deleteAProduct = async (id) => {
 export const productByCategory = async (id) => {
   try {
     const res = await axios.get(
-      `${process.env.NEXTAUTH_URL}/api/admin/product-by-category?id=${id}`,
+      `https://urban-market-lok9s05jc-ved-thakre.vercel.app/api/admin/product-by-category?id=${id}`,
       {
         method: "GET",
         headers: {
@@ -91,7 +91,7 @@ export const productByCategory = async (id) => {
 export const productByCollection = async (id) => {
   try {
     const res = await axios.get(
-      `${process.env.NEXTAUTH_URL}/api/collection?id=${id}`,
+      `https://urban-market-lok9s05jc-ved-thakre.vercel.app/api/collection?id=${id}`,
       {
         method: "GET",
         headers: {
@@ -110,7 +110,7 @@ export const productByCollection = async (id) => {
 export const productBySale = async (id) => {
   try {
     const res = await axios.get(
-      `${process.env.NEXTAUTH_URL}/api/admin/on-sale?id=${id}`,
+      `https://urban-market-lok9s05jc-ved-thakre.vercel.app/api/admin/on-sale?id=${id}`,
       {
         method: "GET",
         headers: {
