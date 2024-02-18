@@ -1,4 +1,4 @@
-// Home.js
+// Home.js Final commit before deployment
 "use client";
 import React, { useContext, useEffect, useState } from "react";
 import standGirl_firstbannerhorizontal from "../../public/images/standGirl_firstbannerhorizontal.jpg";
