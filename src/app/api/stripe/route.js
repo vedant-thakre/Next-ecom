@@ -15,11 +15,11 @@ export async function POST(req) {
         payment_method_types: ["card"],
         line_items: res,
         mode: "payment",
-        success_url:
-          `https://urban-market-lok9s05jc-ved-thakre.vercel.app/checkout` +
+        success_url: // full api
+          `/checkout` +
           "?status=success",
         cancel_url:
-          `https://urban-market-lok9s05jc-ved-thakre.vercel.app/checkout` +
+          `/checkout` +
           "?status=cancel",
       });
 

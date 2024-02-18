@@ -17,11 +17,11 @@ export const addNewProduct = async (formData) => {
   }
 };
 
-// Get all products
+// Get all products // full api
 export const getAllAdminProducts = async () => {
   try {
-    const res = await axios.get(
-      `https://urban-market-lok9s05jc-ved-thakre.vercel.app/api/admin/all-products`,
+    const res = await axios.get( 
+      `/api/admin/all-products`,
       {
         method: "GET",
         headers: {
@@ -68,11 +68,11 @@ export const deleteAProduct = async (id) => {
   }
 };
 
-// Get products by category
+// Get products by category // full api
 export const productByCategory = async (id) => {
   try {
     const res = await axios.get(
-      `https://urban-market-lok9s05jc-ved-thakre.vercel.app/api/admin/product-by-category?id=${id}`,
+      `/api/admin/product-by-category?id=${id}`,
       {
         method: "GET",
         headers: {
@@ -87,11 +87,11 @@ export const productByCategory = async (id) => {
   }
 };
 
-// Get products by collection
+// Get products by collection // full api
 export const productByCollection = async (id) => {
   try {
     const res = await axios.get(
-      `https://urban-market-lok9s05jc-ved-thakre.vercel.app/api/collection?id=${id}`,
+      `/api/collection?id=${id}`,
       {
         method: "GET",
         headers: {
@@ -106,11 +106,11 @@ export const productByCollection = async (id) => {
   }
 };
 
-// Products by sale
+// Products by sale // full api
 export const productBySale = async (id) => {
   try {
     const res = await axios.get(
-      `https://urban-market-lok9s05jc-ved-thakre.vercel.app/api/admin/on-sale?id=${id}`,
+      `/api/admin/on-sale?id=${id}`,
       {
         method: "GET",
         headers: {
