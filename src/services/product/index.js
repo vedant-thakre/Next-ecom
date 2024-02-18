@@ -17,11 +17,12 @@ export const addNewProduct = async (formData) => {
   }
 };
 
-// Get all products // full api
+// Get all products
 export const getAllAdminProducts = async () => {
   try {
     const res = await axios.get(
-      `https://urban-market-lac.vercel.app/api/admin/all-products`,
+      `https://urbanmarket.vercel.app/api/admin/all-products`,
+      // `http://localhost:3000/api/admin/all-products`,
       {
         method: "GET",
         headers: {
@@ -68,11 +69,12 @@ export const deleteAProduct = async (id) => {
   }
 };
 
-// Get products by category // full api
+// Get products by category
 export const productByCategory = async (id) => {
   try {
     const res = await axios.get(
-      `https://urban-market-lac.vercel.app/api/admin/product-by-category?id=${id}`,
+      `https://urbanmarket.vercel.app/api/admin/product-by-category?id=${id}`,
+      // `http://localhost:3000/api/admin/product-by-category?id=${id}`,
       {
         method: "GET",
         headers: {
@@ -87,11 +89,12 @@ export const productByCategory = async (id) => {
   }
 };
 
-// Get products by collection // full api
+// Get products by collection
 export const productByCollection = async (id) => {
   try {
     const res = await axios.get(
-      `https://urban-market-lac.vercel.app/api/collection?id=${id}`,
+      `https://urbanmarket.vercel.app/api/collection?id=${id}`,
+      // `http://localhost:3000/api/collection?id=${id}`,
       {
         method: "GET",
         headers: {
@@ -106,11 +109,12 @@ export const productByCollection = async (id) => {
   }
 };
 
-// Products by sale // full api
+// Products by sale
 export const productBySale = async (id) => {
   try {
     const res = await axios.get(
-      `https://urban-market-lac.vercel.app/api/admin/on-sale?id=${id}`,
+      `https://urbanmarket.vercel.app/api/admin/on-sale?id=${id}`,
+      // `http://localhost:3000/api/admin/on-sale?id=${id}`,
       {
         method: "GET",
         headers: {

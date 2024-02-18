@@ -17,9 +17,9 @@ export async function POST(req) {
         mode: "payment",
         // full api
         success_url:
-          `https://urban-market-lac.vercel.app/checkout` + "?status=success",
+          `https://urbanmarket.vercel.app/checkout` + "?status=success",
         cancel_url:
-          `https://urban-market-lac.vercel.app/checkout` + "?status=cancel",
+          `https://urbanmarket.vercel.app/checkout` + "?status=cancel",
       });
 
       return NextResponse.json({

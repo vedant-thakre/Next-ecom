@@ -56,19 +56,19 @@ function SamplePrevArrow(props) {
 export default function Home() {
   const { isAuthUser } = useContext(GlobalContext);
   const [products, setProducts] = useState([]);
-  const [expoloreProducts, setexpoloreProducts] = useState([])
+  const [expoloreProducts, setexpoloreProducts] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
     async function getListOfProducts() {
       const res = await getAllAdminProducts();
+      // console.log("Response",res);
       if (res.success) {
         setProducts(res.data);
       }
     }
     getListOfProducts();
   }, []);
-  
 
   useEffect(() => {
     async function exploreProducts() {
@@ -400,4 +400,3 @@ export default function Home() {
     </main>
   );
 }
-
