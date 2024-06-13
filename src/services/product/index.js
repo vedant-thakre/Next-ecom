@@ -31,6 +31,8 @@ export const getAllAdminProducts = async () => {
       }
     );
 
+    console.log("res --> ",res)
+
     return res.data;
   } catch (error) {
     console.error(error);
@@ -73,7 +75,7 @@ export const deleteAProduct = async (id) => {
 export const productByCategory = async (id) => {
   try {
     const res = await axios.get(
-      `https://urbanmarket.vercel.app/api/admin/product-by-category?id=${id}`,
+      `/api/admin/product-by-category?id=${id}`,
       // `http://localhost:3000/api/admin/product-by-category?id=${id}`,
       {
         method: "GET",
@@ -133,7 +135,7 @@ export const productBySale = async (id) => {
 export const productById = async (id) => {
   try {
     const res = await axios.get(
-      `api/admin/product-by-id?id=${id}`,
+      `https://urbanmarket.vercel.app/api/admin/product-by-id?id=${id}`,
       {
         method: "GET",
         headers: {

@@ -135,7 +135,8 @@ const AdminAddNewProduct = () => {
       currentUpdatedProduct !== null
         ? await updateAProduct(formData)
         : await addNewProduct(formData);  
-
+    
+      console.log(res);
     if (res.success) {
       setComponentLoader({ loading: false, id: "" });
       toast.success(res.message);

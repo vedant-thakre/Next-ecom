@@ -10,6 +10,8 @@ const CommonListing = ({data}) => {
 
   const router = useRouter();
 
+  console.log("CommonListing", data);
+
   useEffect(() => {
     router.refresh();
   }, [])

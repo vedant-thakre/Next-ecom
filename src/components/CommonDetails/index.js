@@ -109,19 +109,21 @@ export default function CommonDetails({ item }) {
     }
   }
 
-const randomIndex = Math.floor(Math.random() * (products.length - 4)) + 4;
-
+  const randomIndex = Math.floor(Math.random() * (products.length - 4)) + 4;
+  console.log("item -->", item);
 
   useEffect(() => {
     async function getListOfProducts() {
       if (item.collection !== "none") {
         const res = await productByCollection(item.collection);
-        if (res.success) {
+        console.log("You make like if", res);
+        if (res?.success) {
           setProducts(res.data);
         }
       } else {
         const res = await productByCategory(item.category);
-        if (res.success) {
+        console.log("You make like else", item.category);
+        if (res?.success) {
           setProducts(res.data);
         }
       }

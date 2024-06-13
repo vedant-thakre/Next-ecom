@@ -62,8 +62,8 @@ export default function Home() {
   useEffect(() => {
     async function getListOfProducts() {
       const res = await getAllAdminProducts();
-      // console.log("Response",res);
-      if (res.success) {
+      console.log("Response",res);
+      if (res?.success) {
         setProducts(res.data);
       }
     }
