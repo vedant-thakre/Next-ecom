@@ -1,8 +1,8 @@
 import GlobalState from "@/context";
 import "./globals.css";
-import Head from "next/head";
+// import Head from "next/head";
 import { Inter } from "next/font/google";
-import logo from "../../public/static/logo.png";
+// import logo from "../../public/static/logo.png";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer/page";
 
@@ -17,11 +17,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
+      {/* <Head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
         <link rel="icon" href={metadata.icon} />
-      </Head>
+      </Head> */}
       <body className={inter.className}>
         <GlobalState>
           <Navbar />
