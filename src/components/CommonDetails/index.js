@@ -9,7 +9,7 @@ import { addToCart } from "@/services/cart";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import Slider from "react-slick";
 import { useRouter } from "next/navigation";
-import { productByCategory, productByCollection } from "@/services/product";
+import { productByCategory, productByCategory2, productByCollection, productByCollection2 } from "@/services/product";
 
 const settings2 = {
   dots: false,
@@ -115,14 +115,12 @@ export default function CommonDetails({ item }) {
   useEffect(() => {
     async function getListOfProducts() {
       if (item.collection !== "none") {
-        const res = await productByCollection(item.collection);
-        console.log("You make like if", res);
+        const res = await productByCollection2(item.collection);
         if (res?.success) {
           setProducts(res.data);
         }
       } else {
-        const res = await productByCategory(item.category);
-        console.log("You make like else", item.category);
+        const res = await productByCategory2(item.category);
         if (res?.success) {
           setProducts(res.data);
         }

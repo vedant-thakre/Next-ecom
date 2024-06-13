@@ -75,6 +75,25 @@ export const deleteAProduct = async (id) => {
 export const productByCategory = async (id) => {
   try {
     const res = await axios.get(
+      `https://urbanmarket.vercel.app/api/admin/product-by-category?id=${id}`,
+      // `http://localhost:3000/api/admin/product-by-category?id=${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Cache-Control": "no-store",
+        },
+      }
+    );
+
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+// Get products by category
+export const productByCategory2 = async (id) => {
+  try {
+    const res = await axios.get(
       `/api/admin/product-by-category?id=${id}`,
       // `http://localhost:3000/api/admin/product-by-category?id=${id}`,
       {
@@ -96,6 +115,25 @@ export const productByCollection = async (id) => {
   try {
     const res = await axios.get(
       `https://urbanmarket.vercel.app/api/collection?id=${id}`,
+      // `http://localhost:3000/api/collection?id=${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Cache-Control": "no-store",
+        },
+      }
+    );
+
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+// Get products by collection
+export const productByCollection2 = async (id) => {
+  try {
+    const res = await axios.get(
+      `/api/collection?id=${id}`,
       // `http://localhost:3000/api/collection?id=${id}`,
       {
         method: "GET",

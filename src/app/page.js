@@ -73,7 +73,7 @@ export default function Home() {
   useEffect(() => {
     async function exploreProducts() {
       const res = await productByCategory("men");
-      if (res.success) {
+      if (res?.success) {
         setexpoloreProducts(res.data);
       }
     }
